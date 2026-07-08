@@ -1,0 +1,134 @@
+/* --- Reset & Base Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    padding: 20px;
+}
+
+/* --- Container & Card Wrapper --- */
+.register-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-box {
+    width: 100%;
+    max-width: 420px;
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #243b55;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* --- Form Fields --- */
+.input-box {
+    margin-bottom: 18px;
+    width: 100%;
+}
+
+.input-box input, 
+.input-box select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccd1d9;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    color: #333333;
+    background-color: #f9fbfd;
+    transition: all 0.3s ease;
+}
+
+/* Target both inputs and select wrappers for unified look */
+.input-box input:focus, 
+.input-box select:focus {
+    border-color: #243b55;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(36, 59, 85, 0.15);
+}
+
+/* Optional styling tweak for placeholder properties */
+.input-box select {
+    cursor: pointer;
+    appearance: none; /* Removes default native arrow for styling customizability */
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><path fill='%23243b55' d='M0 3l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+}
+
+/* --- Interactive Action Button --- */
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #243b55;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background: #141e30;
+}
+
+.btn-submit:active {
+    transform: scale(0.98);
+}
+
+/* --- Alert Messages --- */
+.error-message {
+    text-align: center;
+    color: #d9534f;
+    background-color: #fdf2f2;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* --- Redirection Text --- */
+.bottom-text {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #666666;
+}
+
+.bottom-text a {
+    color: #243b55;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.bottom-text a:hover {
+    color: #141e30;
+    text-decoration: underline;
+}
