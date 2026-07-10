@@ -1,134 +1,357 @@
-/* --- Reset & Base Styles --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+/* ==========================================
+   FindPro Registration Page
+   ========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #141e30, #243b55);
-    padding: 20px;
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px 15px;
+
 }
 
-/* --- Container & Card Wrapper --- */
-.register-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Card */
+
+.register-container{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
 }
 
-.register-box {
-    width: 100%;
-    max-width: 420px;
-    background: #ffffff;
-    padding: 40px 30px;
-    border-radius: 12px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+.register-card{
+
+    width:100%;
+
+    max-width:520px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:40px;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+
+    animation:fadeIn .7s ease;
+
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #243b55;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+/* Logo */
+
+.logo{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
 }
 
-/* --- Form Fields --- */
-.input-box {
-    margin-bottom: 18px;
-    width: 100%;
+.logo h1{
+
+    color:#0f172a;
+
+    font-size:34px;
+
 }
 
-.input-box input, 
-.input-box select {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #ccd1d9;
-    border-radius: 8px;
-    outline: none;
-    font-size: 14px;
-    color: #333333;
-    background-color: #f9fbfd;
-    transition: all 0.3s ease;
+.logo span{
+
+    color:#2563eb;
+
 }
 
-/* Target both inputs and select wrappers for unified look */
-.input-box input:focus, 
-.input-box select:focus {
-    border-color: #243b55;
-    background-color: #ffffff;
-    box-shadow: 0 0 0 3px rgba(36, 59, 85, 0.15);
+.logo p{
+
+    margin-top:8px;
+
+    color:#777;
+
 }
 
-/* Optional styling tweak for placeholder properties */
-.input-box select {
-    cursor: pointer;
-    appearance: none; /* Removes default native arrow for styling customizability */
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><path fill='%23243b55' d='M0 3l5 5 5-5z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    background-size: 12px;
+/* Alerts */
+
+.alert{
+
+    padding:15px;
+
+    border-radius:8px;
+
+    margin-bottom:20px;
+
 }
 
-/* --- Interactive Action Button --- */
-.btn-submit {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 8px;
-    background: #243b55;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.1s ease;
-    margin-top: 10px;
+.alert.error{
+
+    background:#ffe5e5;
+
+    color:#b30000;
+
+    border-left:5px solid red;
+
 }
 
-.btn-submit:hover {
-    background: #141e30;
+.alert ul{
+
+    padding-left:20px;
+
 }
 
-.btn-submit:active {
-    transform: scale(0.98);
+.alert li{
+
+    margin:6px 0;
+
 }
 
-/* --- Alert Messages --- */
-.error-message {
-    text-align: center;
-    color: #d9534f;
-    background-color: #fdf2f2;
-    border: 1px solid #f5c6cb;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    font-size: 14px;
-    font-weight: 500;
+/* Form */
+
+.register-form{
+
+    width:100%;
+
 }
 
-/* --- Redirection Text --- */
-.bottom-text {
-    text-align: center;
-    margin-top: 25px;
-    font-size: 14px;
-    color: #666666;
+.form-group{
+
+    margin-bottom:20px;
+
 }
 
-.bottom-text a {
-    color: #243b55;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s ease;
+.form-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#333;
+
+    font-weight:600;
+
 }
 
-.bottom-text a:hover {
-    color: #141e30;
-    text-decoration: underline;
+.form-group label i{
+
+    color:#2563eb;
+
+    margin-right:6px;
+
+}
+
+/* Inputs */
+
+.form-group input,
+.form-group select{
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #dcdcdc;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:.3s;
+
+    background:#fafafa;
+
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+    border-color:#2563eb;
+
+    background:#fff;
+
+    box-shadow:0 0 10px rgba(37,99,235,.15);
+
+}
+
+/* Password */
+
+.password-box{
+
+    position:relative;
+
+}
+
+.password-box input{
+
+    padding-right:48px;
+
+}
+
+.toggle-password{
+
+    position:absolute;
+
+    right:15px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    cursor:pointer;
+
+    color:#777;
+
+}
+
+.toggle-password:hover{
+
+    color:#2563eb;
+
+}
+
+/* Button */
+
+.register-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-weight:bold;
+
+}
+
+.register-btn:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 25px rgba(37,99,235,.3);
+
+}
+
+/* Login Link */
+
+.login-link{
+
+    text-align:center;
+
+    margin-top:25px;
+
+    color:#555;
+
+    font-size:15px;
+
+}
+
+.login-link a{
+
+    text-decoration:none;
+
+    color:#2563eb;
+
+    font-weight:bold;
+
+}
+
+.login-link a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* Animation */
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .register-card{
+
+        padding:30px 25px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    body{
+
+        padding:20px 10px;
+
+    }
+
+    .register-card{
+
+        padding:25px 20px;
+
+        border-radius:14px;
+
+    }
+
+    .logo h1{
+
+        font-size:28px;
+
+    }
+
+    .register-btn{
+
+        font-size:16px;
+
+    }
+
 }
