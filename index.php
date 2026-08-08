@@ -57,7 +57,82 @@
                     <button type="submit">Find Services</button>
                 </form>
             </div>
+        </div>
+    </section> <section class="featured reveal">
+        <div class="section-title">
+            <h2>Featured Service Providers</h2>
+            <p>Discover trusted professionals recommended for you.</p>
+        </div>
 
+        <div class="provider-grid">
+            <a href="provider.php?id=1" class="provider-card">
+                <div class="provider-image">
+                    <img src="assets/images/h.jpg" alt="Provider">
+                    <span class="verified">
+                        <i class="fa-solid fa-circle-check"></i> Verified
+                    </span>
+                </div>
+                <div class="provider-info">
+                    <h3>Paschal Mshandete</h3>
+                    <span class="profession">Programmer</span>
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i> 4.9
+                    </div>
+                </div>
+            </a>
+
+            <a href="provider.php?id=2" class="provider-card">
+                <div class="provider-image">
+                    <img src="assets/images/f.jpg" alt="Provider">
+                    <span class="verified">
+                        <i class="fa-solid fa-circle-check"></i> Verified
+                    </span>
+                </div>
+                <div class="provider-info">
+                    <h3>Niwael Mavella</h3>
+                    <span class="profession">Engineer</span>
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i> 4.8
+                    </div>
+                </div>
+            </a>
+
+            <a href="provider.php?id=3" class="provider-card">
+                <div class="provider-image">
+                    <img src="assets/images/i.jpg" alt="Provider">
+                    <span class="verified">
+                        <i class="fa-solid fa-circle-check"></i> Verified
+                    </span>
+                </div>
+                <div class="provider-info">
+                    <h3>Leonard Ndaro</h3>
+                    <span class="profession">Mechanic</span>
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i> 5.0
+                    </div>
+                </div>
+            </a>
+
+            <a href="provider.php?id=2" class="provider-card">
+                <div class="provider-image">
+                    <img src="assets/images/mavella.jpg" alt="Provider">
+                    <span class="verified">
+                        <i class="fa-solid fa-circle-check"></i> Verified
+                    </span>
+                </div>
+                <div class="provider-info">
+                    <h3>Godad Machumu</h3>
+                    <span class="profession">Engineer</span>
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i> 4.8
+                    </div>
+                </div>
+            </a>
+            
+
+        </div>
+    </section>
+    <section>
             <div class="statistics">
                 <div class="stat">
                     <i class="fa-solid fa-user-check"></i>
@@ -86,63 +161,7 @@
 
             <div class="scroll-down">
                 <i class="fa-solid fa-angles-down"></i>
-            </div>
-        </div>
-    </section> <section class="featured reveal">
-        <div class="section-title">
-            <h2>Featured Service Providers</h2>
-            <p>Discover trusted professionals recommended for you.</p>
-        </div>
-
-        <div class="provider-grid">
-            <a href="provider.php?id=1" class="provider-card">
-                <div class="provider-image">
-                    <img src="assets/images/msagambegu.jpg" alt="Provider">
-                    <span class="verified">
-                        <i class="fa-solid fa-circle-check"></i> Verified
-                    </span>
-                </div>
-                <div class="provider-info">
-                    <h3>Ndete Mwana</h3>
-                    <span class="profession">Programmer</span>
-                    <div class="rating">
-                        <i class="fa-solid fa-star"></i> 4.9
-                    </div>
-                </div>
-            </a>
-
-            <a href="provider.php?id=2" class="provider-card">
-                <div class="provider-image">
-                    <img src="assets/images/t.jpg" alt="Provider">
-                    <span class="verified">
-                        <i class="fa-solid fa-circle-check"></i> Verified
-                    </span>
-                </div>
-                <div class="provider-info">
-                    <h3>Sarah John</h3>
-                    <span class="profession">Plumber</span>
-                    <div class="rating">
-                        <i class="fa-solid fa-star"></i> 4.8
-                    </div>
-                </div>
-            </a>
-
-            <a href="provider.php?id=3" class="provider-card">
-                <div class="provider-image">
-                    <img src="assets/images/q.jpg" alt="Provider">
-                    <span class="verified">
-                        <i class="fa-solid fa-circle-check"></i> Verified
-                    </span>
-                </div>
-                <div class="provider-info">
-                    <h3>David Peter</h3>
-                    <span class="profession">Mechanic</span>
-                    <div class="rating">
-                        <i class="fa-solid fa-star"></i> 5.0
-                    </div>
-                </div>
-            </a>
-        </div>
+            </div> 
     </section>
 
     <script src="assets/js/main.js"></script>

@@ -5,20 +5,17 @@
     </div>
 
     <nav class="nav-links" id="navLinks">
-
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#about">How it works</a>
-        <a href="#providers">Providers</a>
-
+        <a href="index.php">Home</a>
+        <a href="services.php">Services</a>
+        <a href="about.php">How it works</a>
+        <a href="providers.php">Providers</a>
+        
+        <!-- Action Buttons kwa ajili ya Skrini ndogo (Mobile) -->
+        <div class="mobile-actions">
+            <button class="btn-outline" onclick="window.location.href='auth/login.php'">Login</button>
+            <button class="btn-primary" onclick="window.location.href='auth/register.php'">Register</button>
+        </div>
     </nav>
-
-    <div class="nav-actions">
-
-        <button class="btn-outline">Login</button>
-        <button class="btn-primary">Register</button>
-
-    </div>
 
     <!-- MOBILE MENU ICON -->
     <div class="menu-icon" onclick="toggleMenu()">
