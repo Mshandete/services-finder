@@ -111,7 +111,7 @@ $userName = $_SESSION['full_name'] ?? 'Client';
             <h2>Featured Professionals</h2>
             <p>Highly rated professionals available today.</p>
         </div>
-        <a href="#" class="link-view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#" class="link-view-all">View All <i></i></a>
     </div>
 
     <div class="featured-grid">

@@ -129,7 +129,7 @@
                 </div>
                 <h3>Amani Electrical</h3>
                 <p>Electrical Specialist</p>
-                <a href="dashboard.php?page=provider&id=2" class="profile-btn">View Profile <i class="bi bi-arrow-right"></i></a>
+                <a href="dashboard.php?page=provider&id=2" class="profile-btn">View Profile <i></i></a>
             </div>
         </article>
 
@@ -148,7 +148,7 @@
                 </div>
                 <h3>CleanPro Services</h3>
                 <p>Cleaning Specialist</p>
-                <a href="dashboard.php?page=provider&id=3" class="profile-btn">View Profile <i class="bi bi-arrow-right"></i></a>
+                <a href="dashboard.php?page=provider&id=3" class="profile-btn">View Profile <i></i></a>
             </div>
         </article>
 
@@ -167,8 +167,90 @@
                 </div>
                 <h3>Mtaa Auto Garage</h3>
                 <p>Automotive Specialist</p>
-                <a href="dashboard.php?page=provider&id=4" class="profile-btn">View Profile <i class="bi bi-arrow-right"></i></a>
+                <a href="dashboard.php?page=provider&id=4" class="profile-btn">View Profile <i></i></a>
             </div>
+        </article>
+
+    </div>
+</section>
+
+<section class="section nearby-section reveal">
+    <div class="section-header">
+        <div>
+            <span class="section-eyebrow">Around You</span>
+            <h2 class="section-title">Providers Near You</h2>
+            <p class="section-subtitle">Professionals available around your current area.</p>
+        </div>
+        <a href="dashboard.php?page=services" class="section-link">Explore nearby <i class="bi bi-arrow-right"></i></a>
+    </div>
+
+    <div class="nearby-location">
+        <div class="location-icon">
+            <i class="bi bi-geo-alt-fill"></i>
+        </div>
+        <div>
+            <span>Your current area</span>
+            <strong>Dar es Salaam, Tanzania</strong>
+        </div>
+        <button type="button" class="change-location">
+            <i class="bi bi-crosshair"></i> Change
+        </button>
+    </div>
+
+    <div class="nearby-grid">
+
+        <article class="nearby-card reveal-item">
+            <div class="nearby-avatar">
+                <img src="../assets/images/c.jpg" alt="David Electronics">
+                <span class="online-dot"></span>
+            </div>
+            <div class="nearby-info">
+                <div class="nearby-title">
+                    <h3>David Electronics</h3>
+                    <span class="nearby-rating"><i class="bi bi-star-fill"></i> 4.8</span>
+                </div>
+                <p>Electrical Specialist</p>
+                <span class="nearby-distance"><i class="bi bi-geo-alt"></i> 1.4 km away</span>
+            </div>
+            <a href="dashboard.php?page=provider&id=5" class="nearby-arrow">
+                <i class="bi bi-arrow-up-right"></i>
+            </a>
+        </article>
+
+        <article class="nearby-card reveal-item">
+            <div class="nearby-avatar">
+                <img src="../assets/images/b.jpg" alt="Grace Cleaning">
+                <span class="online-dot"></span>
+            </div>
+            <div class="nearby-info">
+                <div class="nearby-title">
+                    <h3>Grace Cleaning</h3>
+                    <span class="nearby-rating"><i class="bi bi-star-fill"></i> 4.9</span>
+                </div>
+                <p>Home Cleaning</p>
+                <span class="nearby-distance"><i class="bi bi-geo-alt"></i> 2.1 km away</span>
+            </div>
+            <a href="dashboard.php?page=provider&id=6" class="nearby-arrow">
+                <i class="bi bi-arrow-up-right"></i>
+            </a>
+        </article>
+
+        <article class="nearby-card reveal-item">
+            <div class="nearby-avatar">
+                <img src="../assets/images/a.jpg" alt="Mike Auto Care">
+                <span class="online-dot"></span>
+            </div>
+            <div class="nearby-info">
+                <div class="nearby-title">
+                    <h3>Mike Auto Care</h3>
+                    <span class="nearby-rating"><i class="bi bi-star-fill"></i> 4.7</span>
+                </div>
+                <p>Auto Mechanic</p>
+                <span class="nearby-distance"><i class="bi bi-geo-alt"></i> 2.8 km away</span>
+            </div>
+            <a href="dashboard.php?page=provider&id=7" class="nearby-arrow">
+                <i class="bi bi-arrow-up-right"></i>
+            </a>
         </article>
 
     </div>

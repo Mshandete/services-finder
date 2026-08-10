@@ -13,13 +13,13 @@
 <div class="dashboard-container">
 
     <!-- Sidebar -->
-    <?php include __DIR__ . '../components/sidebar.php'; ?>
+    <?php include __DIR__ . '/components/sidebar.php'; ?>
 
     <!-- Main Content Area -->
     <main class="main-content">
         
         <!-- Topbar -->
-        <?php include __DIR__ . '../components/topbar.php'; ?>
+        <?php include __DIR__ . '/components/topbar.php'; ?>
 
         <!-- Dashboard Body Content -->
         <div class="content-body">

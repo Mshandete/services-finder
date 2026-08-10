@@ -47,7 +47,10 @@ $viewFile=__DIR__."/views/home.php";
 <link rel="stylesheet" href="../assets/css/components.css">
 <link rel="stylesheet" href="../assets/css/layout.css">
 <link rel="stylesheet" href="../assets/css/responsive.css">
-
+<link rel="stylesheet" href="../assets/css/bookings.css">
+<link rel="stylesheet" href="../assets/css/favorites.css">
+<link rel="stylesheet" href="../assets/css/messages.css">
+<link rel="stylesheet" href="../assets/css/footer.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
@@ -61,6 +64,7 @@ $viewFile=__DIR__."/views/home.php";
     <main class="main">
 
         <?php include __DIR__.'/components/topbar.php'; ?>
+
 
         <section class="content">
 

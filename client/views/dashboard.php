@@ -27,7 +27,7 @@
             </div>
             <div class="topbar-right">
                 <div class="location-picker">
-                    📍 <span>Dar es Salaam</span>
+                     <span>Dar es Salaam</span>
                 </div>
                 <div class="notifications">
                     🔔 <span class="notif-badge">3</span>
@@ -116,7 +116,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>📍 June 10</td>
+                                        <td> June 10</td>
                                         <td><strong>TSh 60,000</strong></td>
                                         <td>
                                             <button class="btn-accept">Accept</button>
@@ -133,7 +133,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>📍 June 10</td>
+                                        <td>June 10</td>
                                         <td><strong>TSh 60,000</strong></td>
                                         <td>
                                             <button class="btn-accept">Accept</button>
@@ -150,7 +150,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>📍 June 10</td>
+                                        <td>June 10</td>
                                         <td><strong>TSh 60,000</strong></td>
                                         <td>
                                             <button class="btn-accept">Accept</button>

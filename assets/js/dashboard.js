@@ -34,3 +34,7 @@ el.style.transitionDelay=(index*0.15)+"s";
 observer.observe(el);
 
 });
+
+document.querySelectorAll(".reveal,.reveal-item").forEach(el=>revealObserver.observe(el));
+document.querySelectorAll(".nearby-grid .reveal-item").forEach((el,index)=>{
+    el.style.transitionDelay=`${index*.12}s`});

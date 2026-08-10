@@ -1,4 +1,7 @@
-/* Styling for Provider Dashboard matching the selected design */
+/* ==========================================
+   PROVIDER DASHBOARD MAIN STYLES
+   ========================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,15 +9,21 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-body {
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
     background-color: #f4f7f6;
-    color: #333;
 }
 
+/* Core Dashboard Layout */
 .dashboard-container {
     display: flex;
-    min-height: 100vh;
     width: 100%;
+    min-height: 100vh;
+    position: relative;
 }
 
 /* --- SIDEBAR --- */
@@ -25,7 +34,8 @@ body {
     display: flex;
     flex-direction: column;
     border-right: 1px solid #e9ecef;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Inazuia sidebar isibinyike */
+    z-index: 100;
 }
 
 .sidebar-logo .logo {
@@ -100,17 +110,19 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    min-width: 0;
+    min-width: 0; /* MUHIMU: Inazuia grid kusukuma kulia */
+    background-color: #f4f7f6;
 }
 
 .topbar {
-    height: 75px;
+    min-height: 75px;
     background: #ffffff;
     border-bottom: 1px solid #e9ecef;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 35px;
+    width: 100%;
 }
 
 .search-bar {
@@ -161,7 +173,8 @@ body {
 
 /* --- DASHBOARD CONTENT BODY --- */
 .content-body {
-    padding: 30px 35px;
+    padding: 25px 35px;
+    width: 100%;
 }
 
 .welcome-banner {
@@ -233,7 +246,7 @@ input:checked + .slider:before {
     transform: translateX(22px);
 }
 
-/* GRID LAYOUT */
+/* GRID LAYOUTS */
 .dashboard-grid {
     display: grid;
     grid-template-columns: 2.3fr 1fr;
@@ -398,7 +411,242 @@ input:checked + .slider:before {
     border-radius: 10px;
 }
 
-/* RESPONSIVE DESIGN FOR SMARTPHONE & TABLET */
+/* --- SERVICES MANAGER STYLES --- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.page-header h2 {
+    font-size: 1.5rem;
+    color: #1a202c;
+    margin-bottom: 4px;
+}
+
+.btn-primary {
+    background: #00b074;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background: #009663;
+}
+
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.service-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.service-card-image {
+    position: relative;
+    height: 160px;
+    width: 100%;
+    overflow: hidden; /* Fix ya picha kupasuka nje */
+}
+
+.service-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-active {
+    background: #e6f7f1;
+    color: #00b074;
+}
+
+.badge-inactive {
+    background: #edf2f7;
+    color: #718096;
+}
+
+.inactive-card {
+    opacity: 0.75;
+}
+
+.service-card-body {
+    padding: 20px;
+    flex: 1;
+}
+
+.category-tag {
+    color: #00b074;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.service-card-body h3 {
+    font-size: 1.1rem;
+    color: #2d3748;
+    margin: 6px 0 10px;
+}
+
+.service-desc {
+    font-size: 0.85rem;
+    color: #718096;
+    line-height: 1.4;
+    margin-bottom: 16px;
+}
+
+.service-meta {
+    display: flex;
+    justify-content: space-between;
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.service-meta small {
+    display: block;
+    font-size: 0.72rem;
+    color: #a0aec0;
+}
+
+.service-meta strong {
+    color: #1a202c;
+    font-size: 0.95rem;
+}
+
+.service-card-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #edf2f7;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-action-outline {
+    flex: 1;
+    background: transparent;
+    border: 1px solid #cbd5e0;
+    color: #4a5568;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-action-danger {
+    background: #fff5f5;
+    border: 1px solid #feb2b2;
+    color: #e53e3e;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Modal Overlay & Box */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 550px;
+    padding: 25px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #a0aec0;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 6px;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* ==========================================
+   CONSOLIDATED RESPONSIVE (MOBILE & TABLET)
+   ========================================== */
+
 @media (max-width: 1024px) {
     .dashboard-grid {
         grid-template-columns: 1fr;
@@ -410,20 +658,61 @@ input:checked + .slider:before {
 
 @media (max-width: 768px) {
     .sidebar {
-        display: none; /* In app transition, bottom nav takes over */
+        display: none; /* Inaficha sidebar kwenye simu */
     }
+
+    .content-body {
+        padding: 15px;
+    }
+
     .topbar {
-        padding: 0 15px;
+        padding: 12px 15px;
+        flex-direction: column;
+        gap: 12px;
+        height: auto;
     }
+
+    .topbar-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
     .search-bar {
-        width: 180px;
+        width: 100%;
     }
-    .stats-grid {
-        grid-template-columns: 1fr;
+
+    .user-info {
+        display: none; /* Inapunguza msongamano wa jina kwenye mobile */
     }
+
     .welcome-banner {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
+    }
+
+    .stats-grid, .services-stats {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .modal-content {
+        width: 92%;
+        padding: 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
     }
 }
