@@ -1,28 +1,35 @@
 /* =========================================================
-   FINDPRO — CLIENT GLOBAL FOOTER
+   FINDPRO CLIENT FOOTER
+   Clean Green Theme
    ========================================================= */
 
 .client-footer {
     width: 100%;
-    margin-top: 50px;
-    border-top: 1px solid #e7eee9;
-    background: #fbfcfb;
-    color: #69746d;
+    margin-top: 45px;
+
+    background: #ffffff;
+    border-top: 1px solid #e3eee8;
+
+    box-sizing: border-box;
 }
 
-.client-footer-inner {
-    max-width: 1280px;
+
+/* =========================================================
+   MAIN FOOTER
+   ========================================================= */
+
+.client-footer-main {
+    width: 100%;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 34px 4px 30px;
+
+    padding: 38px 30px;
 
     display: grid;
-    grid-template-columns:
-        minmax(190px, 1.6fr)
-        minmax(120px, 1fr)
-        minmax(100px, .8fr)
-        minmax(100px, .8fr);
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 45px;
 
-    gap: 35px;
+    box-sizing: border-box;
 }
 
 
@@ -30,111 +37,69 @@
    BRAND
    ========================================================= */
 
+.footer-brand {
+    padding-right: 25px;
+}
+
 .footer-logo {
     display: inline-block;
-    margin-bottom: 9px;
 
-    color: #253129;
-    font-size: 19px;
+    margin-bottom: 10px;
+
+    color: #19352a;
+    font-size: 21px;
     font-weight: 750;
-    letter-spacing: -.05em;
+    letter-spacing: -0.6px;
+
     text-decoration: none;
 }
 
 .footer-logo span {
-    color: #2ecc71;
+    color: #20a95b;
 }
 
 .footer-brand p {
+    max-width: 250px;
+
     margin: 0;
-    color: #929c95;
-    font-size: 9.5px;
-    line-height: 1.75;
+
+    color: #89978f;
+    font-size: 10px;
+    line-height: 1.8;
 }
 
 
 /* =========================================================
-   FOOTER LINKS
+   FOOTER GROUPS
    ========================================================= */
 
-.footer-links,
-.footer-account,
-.footer-connect {
+.footer-group {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    gap: 9px;
 }
 
-.footer-links {
-    gap: 8px;
-}
+.footer-group h4 {
+    margin: 0 0 5px;
 
-.footer-account,
-.footer-connect {
-    gap: 7px;
-}
-
-.footer-account > span,
-.footer-connect > span {
-    margin-bottom: 4px;
-
-    color: #39453e;
-    font-size: 9px;
-    font-weight: 750;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-}
-
-.footer-links a,
-.footer-account a {
-    color: #8b958e;
-    font-size: 9.5px;
-    text-decoration: none;
-    transition: .2s ease;
-}
-
-.footer-links a:hover,
-.footer-account a:hover {
-    color: #2a9954;
-    transform: translateX(2px);
-}
-
-
-/* =========================================================
-   SOCIAL
-   ========================================================= */
-
-.footer-socials {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-}
-
-.footer-socials a {
-    width: 29px;
-    height: 29px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid #e1e9e3;
-    border-radius: 50%;
-
-    background: #fff;
-    color: #7e8981;
-
+    color: #253b30;
     font-size: 10px;
-    text-decoration: none;
-
-    transition: .2s ease;
+    font-weight: 700;
 }
 
-.footer-socials a:hover {
-    border-color: #2ecc71;
-    background: #2ecc71;
-    color: #fff;
-    transform: translateY(-2px);
+.footer-group a {
+    color: #84938b;
+    font-size: 10px;
+
+    text-decoration: none;
+
+    transition: color .2s ease;
+}
+
+.footer-group a:hover {
+    color: #20a95b;
 }
 
 
@@ -142,38 +107,45 @@
    BOTTOM
    ========================================================= */
 
-.footer-bottom {
-    max-width: 1280px;
+.client-footer-bottom {
+    width: 100%;
+    max-width: 1120px;
+
     margin: 0 auto;
+
+    padding: 15px 30px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 15px 4px;
+    border-top: 1px solid #edf3ef;
 
-    border-top: 1px solid #e8eee9;
+    box-sizing: border-box;
 }
 
-.footer-bottom > span {
-    color: #a0a9a3;
-    font-size: 8.5px;
+.client-footer-bottom > span {
+    color: #9aa69f;
+    font-size: 9px;
 }
 
-.footer-bottom > div {
+.client-footer-bottom > div {
     display: flex;
-    gap: 16px;
+    align-items: center;
+    gap: 20px;
 }
 
-.footer-bottom a {
-    color: #9aa39d;
-    font-size: 8.5px;
+.client-footer-bottom a {
+    color: #96a19b;
+    font-size: 9px;
+
     text-decoration: none;
-    transition: .2s ease;
+
+    transition: color .2s ease;
 }
 
-.footer-bottom a:hover {
-    color: #2ecc71;
+.client-footer-bottom a:hover {
+    color: #20a95b;
 }
 
 
@@ -181,14 +153,15 @@
    TABLET
    ========================================================= */
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 
-    .client-footer-inner {
+    .client-footer-main {
         grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 30px;
     }
 
-    .footer-connect {
-        display: none;
+    .footer-brand {
+        padding-right: 10px;
     }
 
 }
@@ -198,34 +171,50 @@
    MOBILE
    ========================================================= */
 
-@media (max-width: 560px) {
+@media (max-width: 650px) {
 
     .client-footer {
         margin-top: 35px;
     }
 
-    .client-footer-inner {
+    .client-footer-main {
         grid-template-columns: 1fr 1fr;
+
+        padding: 32px 22px;
+
         gap: 28px 20px;
-        padding: 28px 4px;
     }
 
     .footer-brand {
         grid-column: 1 / -1;
+
+        padding-right: 0;
     }
 
-    .footer-links {
-        gap: 7px;
-    }
-
-    .footer-account {
-        gap: 7px;
-    }
-
-    .footer-bottom {
+    .client-footer-bottom {
         align-items: flex-start;
         flex-direction: column;
-        gap: 9px;
+
+        gap: 10px;
+
+        padding: 15px 22px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .client-footer-main {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+        grid-column: auto;
     }
 
 }

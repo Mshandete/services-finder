@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 <footer class="client-footer">
 
-    <div class="client-footer-inner">
+    <div class="client-footer-main">
 
         <!-- Brand -->
         <div class="footer-brand">
@@ -14,97 +14,68 @@ declare(strict_types=1);
             </a>
 
             <p>
-                Find trusted local professionals<br>
-                for the services you need.
+                Find reliable professionals and get
+                the services you need with ease.
             </p>
 
         </div>
 
 
-        <!-- Navigation -->
-        <nav class="footer-links">
+        <!-- Explore -->
+        <div class="footer-group">
 
-            <a href="dashboard.php?page=home">
-                Home
-            </a>
+            <h4>Explore</h4>
 
-            <a href="dashboard.php?page=services">
-                Services
-            </a>
+            <a href="dashboard.php?page=home">Home</a>
 
-            <a href="dashboard.php?page=bookings">
-                Bookings
-            </a>
+            <a href="dashboard.php?page=services">Services</a>
 
-            <a href="dashboard.php?page=favorites">
-                Favorites
-            </a>
-
-            <a href="dashboard.php?page=messages">
-                Messages
-            </a>
-
-        </nav>
-
-
-        <!-- Account -->
-        <div class="footer-account">
-
-            <span>Account</span>
-
-            <a href="dashboard.php?page=profile">
-                Profile
-            </a>
-
-            <a href="dashboard.php?page=settings">
-                Settings
-            </a>
+            <a href="dashboard.php?page=bookings">Bookings</a>
 
         </div>
 
 
-        <!-- Social / Contact -->
-        <div class="footer-connect">
+        <!-- Account -->
+        <div class="footer-group">
 
-            <span>Connect</span>
+            <h4>Account</h4>
 
-            <div class="footer-socials">
+            <a href="dashboard.php?page=favorites">Favorites</a>
 
-                <a href="#" aria-label="Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
+            <a href="dashboard.php?page=messages">Messages</a>
 
-                <a href="#" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
+            <a href="dashboard.php?page=profile">Profile</a>
 
-                <a href="#" aria-label="WhatsApp">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>
+        </div>
 
-            </div>
+
+        <!-- Help -->
+        <div class="footer-group">
+
+            <h4>Help</h4>
+
+            <a href="dashboard.php?page=settings">Settings</a>
+
+            <a href="#">Help Center</a>
+
+            <a href="#">Contact Us</a>
 
         </div>
 
     </div>
 
 
-    <!-- Bottom -->
-    <div class="footer-bottom">
+    <div class="client-footer-bottom">
 
         <span>
-            © <?= date('Y'); ?> FindPro. All rights reserved.
+            © <?= date('Y'); ?> FindPro
         </span>
 
         <div>
 
-            <a href="#">
-                Privacy
-            </a>
+            <a href="#">Privacy Policy</a>
 
-            <a href="#">
-                Terms
-            </a>
+            <a href="#">Terms of Service</a>
 
         </div>
 
