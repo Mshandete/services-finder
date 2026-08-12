@@ -136,20 +136,6 @@ cursor:pointer;
 box-shadow:0 8px 20px rgba(0,0,0,.1);
 }
 
-.verified-badge{
-position:absolute;
-left:16px;
-bottom:16px;
-background:#16a34a;
-color:#fff;
-padding:8px 14px;
-border-radius:30px;
-font-size:.8rem;
-display:flex;
-align-items:center;
-gap:6px;
-}
-
 .provider-body{
 padding:22px;
 }

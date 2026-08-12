@@ -16,6 +16,7 @@ declare(strict_types=1);
 
     <!-- Homepage CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/home.css">
 
 </head>
 <body>
