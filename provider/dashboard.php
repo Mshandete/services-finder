@@ -1,207 +1,357 @@
+<?php
+declare(strict_types=1);
+
+/**
+ * FindPro - Provider Dashboard
+ *
+ * This file is responsible for:
+ * 1. Authenticating the provider.
+ * 2. Loading the logged-in provider.
+ * 3. Preparing dashboard data.
+ * 4. Routing dashboard views.
+ *
+ * IMPORTANT:
+ * Dashboard values should come from the database.
+ * Do NOT hard-code earnings, bookings, jobs, ratings, etc.
+ */
+
+require_once "../includes/auth.php";
+requireRole("provider");
+
+require_once "../config/database.php";
+
+/*
+|--------------------------------------------------------------------------
+| Provider ID
+|--------------------------------------------------------------------------
+| We expect the logged-in user's ID to be stored in the session.
+*/
+$providerId = $_SESSION['user_id'] ?? null;
+
+if (!$providerId) {
+    header("Location: ../auth/login.php");
+    exit;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Dashboard Page
+|--------------------------------------------------------------------------
+| This allows:
+|
+| /provider/dashboard.php
+| /provider/dashboard.php?page=services
+| /provider/dashboard.php?page=bookings
+| /provider/dashboard.php?page=earnings
+| etc.
+*/
+
+$page = $_GET['page'] ?? 'home';
+
+$allowedPages = [
+    'home',
+    'services',
+    'bookings',
+    'earnings',
+    'messages',
+    'reviews',
+    'profile',
+    'settings'
+];
+
+if (!in_array($page, $allowedPages, true)) {
+    $page = 'home';
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Provider Information
+|--------------------------------------------------------------------------
+*/
+
+$provider = null;
+
+try {
+
+    $stmt = $pdo->prepare("
+        SELECT
+            u.id,
+            u.first_name,
+            u.last_name,
+            u.email
+        FROM users u
+        WHERE u.id = ?
+        LIMIT 1
+    ");
+
+    $stmt->execute([$providerId]);
+
+    $provider = $stmt->fetch(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+
+    error_log("Provider dashboard user query failed: " . $e->getMessage());
+
+    $provider = null;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Safe Provider Name
+|--------------------------------------------------------------------------
+*/
+
+$providerName = 'Provider';
+
+if ($provider) {
+
+    $fullName = trim(
+        ($provider['first_name'] ?? '') . ' ' .
+        ($provider['last_name'] ?? '')
+    );
+
+    if ($fullName !== '') {
+        $providerName = $fullName;
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Dashboard Statistics
+|--------------------------------------------------------------------------
+|
+| These values are initialized here and will be populated
+| from the real database.
+|
+| We deliberately DO NOT put fake values here.
+|
+*/
+
+$dashboardStats = [
+    'total_earnings'  => 0,
+    'new_requests'    => 0,
+    'completed_jobs'  => 0,
+    'average_rating'  => 0,
+    'review_count'    => 0
+];
+
+
+/*
+|--------------------------------------------------------------------------
+| Provider Profile
+|--------------------------------------------------------------------------
+*/
+
+$providerProfile = null;
+
+try {
+
+    $stmt = $pdo->prepare("
+        SELECT *
+        FROM provider_profiles
+        WHERE user_id = ?
+        LIMIT 1
+    ");
+
+    $stmt->execute([$providerId]);
+
+    $providerProfile = $stmt->fetch(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+
+    error_log("Provider profile query failed: " . $e->getMessage());
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Provider Services Count
+|--------------------------------------------------------------------------
+*/
+
+$totalServices = 0;
+
+try {
+
+    $stmt = $pdo->prepare("
+        SELECT COUNT(*)
+        FROM provider_services
+        WHERE provider_id = ?
+    ");
+
+    $stmt->execute([$providerId]);
+
+    $totalServices = (int) $stmt->fetchColumn();
+
+} catch (PDOException $e) {
+
+    error_log("Provider services query failed: " . $e->getMessage());
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Availability
+|--------------------------------------------------------------------------
+|
+| We don't assume a specific column yet.
+| It will be connected to the exact provider_profiles
+| schema when we wire the database fully.
+|
+*/
+
+$isAvailable = true;
+
+
+/*
+|--------------------------------------------------------------------------
+| View Paths
+|--------------------------------------------------------------------------
+*/
+
+$viewPath = __DIR__ . "/views/{$page}.php";
+
+
+/*
+|--------------------------------------------------------------------------
+| Dashboard Layout
+|--------------------------------------------------------------------------
+|
+| These components will be created separately.
+|
+*/
+
+$sidebarPath = __DIR__ . "/components/sidebar.php";
+$topbarPath  = __DIR__ . "/components/topbar.php";
+$footerPath  = __DIR__ . "/components/footer.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FindPro - Provider Dashboard</title>
-    <!-- Absolute paths to prevent CSS breakdown -->
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/provider.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        <?= htmlspecialchars(ucfirst($page)) ?> | FindPro
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/provider-dashboard.css"
+    >
+
 </head>
+
 <body>
 
-<div class="dashboard-container">
+<div class="provider-app">
+
 
     <!-- Sidebar -->
-    <?php include __DIR__ . '/components/sidebar.php'; ?>
+    <aside class="provider-sidebar">
 
-    <!-- Main Content Area -->
-    <main class="main-content">
-        
+        <?php
+
+        if (file_exists($sidebarPath)) {
+            require $sidebarPath;
+        }
+
+        ?>
+
+    </aside>
+
+
+    <!-- Main Application -->
+    <div class="provider-main">
+
+
         <!-- Topbar -->
-        <?php include __DIR__ . '/components/topbar.php'; ?>
+        <header class="provider-topbar">
 
-        <!-- Dashboard Body Content -->
-        <div class="content-body">
-            
-            <!-- Hero Status Banner -->
-            <section class="welcome-banner">
-                <div class="banner-text">
-                    <h1>Welcome back, Paschal!</h1>
-                    <p>Set Your Availability.</p>
-                </div>
-                <div class="status-toggle-card">
-                    <span>Status: <strong>Online (Available for Hire)</strong></span>
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider round"></span>
-                    </label>
-                </div>
-            </section>
+            <?php
 
-            <!-- Dashboard Main Grid -->
-            <div class="dashboard-grid">
-                
-                <!-- Left Column (Stats & Recent Requests) -->
-                <div class="grid-left">
-                    
-                    <!-- Stats Grid -->
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <span class="stat-title">Earnings</span>
-                            <h2>TSh 450,000</h2>
-                            <small class="text-muted">Today/Month</small>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-title">Pending Requests</span>
-                            <h2>3</h2>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-title">Upcoming Jobs</span>
-                            <h2>2</h2>
-                            <small class="text-muted">(confirmed)</small>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-title">Overall Rating</span>
-                            <h2>4.9 ⭐</h2>
-                            <small class="text-muted">24 Reviews</small>
-                        </div>
-                    </div>
+            if (file_exists($topbarPath)) {
+                require $topbarPath;
+            }
 
-                    <!-- Recent Service Requests Table -->
-                    <div class="card requests-card">
-                        <div class="card-header">
-                            <h3>Recent Service Requests</h3>
-                            <a href="/services-finder/provider/views/requests.php" class="view-all">View all &rarr;</a>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="requests-table">
-                                <thead>
-                                    <tr>
-                                        <th>Client</th>
-                                        <th>Location</th>
-                                        <th>Price Offer</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="client-cell">
-                                                <img src="../assets/images/b.jpg" class="avatar-sm">
-                                                <div>
-                                                    <strong>Sarah J.</strong>
-                                                    <small>A/C Repair</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>📍 Kinondoni, DSM</td>
-                                        <td><strong>TSh 60,000</strong></td>
-                                        <td>
-                                            <button class="btn-accept">Accept</button>
-                                            <button class="btn-decline">Decline</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="client-cell">
-                                                <img src="../assets/images/c.jpg" class="avatar-sm">
-                                                <div>
-                                                    <strong>Sarah J.</strong>
-                                                    <small>Plumbing</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>📍 Ubungo, DSM</td>
-                                        <td><strong>TSh 60,000</strong></td>
-                                        <td>
-                                            <button class="btn-accept">Accept</button>
-                                            <button class="btn-decline">Decline</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="client-cell">
-                                                <img src="../assets/images/f.jpg" class="avatar-sm">
-                                                <div>
-                                                    <strong>Sarah J.</strong>
-                                                    <small>Electrical</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>📍 Mbezi, DSM</td>
-                                        <td><strong>TSh 60,000</strong></td>
-                                        <td>
-                                            <button class="btn-accept">Accept</button>
-                                            <button class="btn-decline">Decline</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+            ?>
 
-                </div>
+        </header>
 
-                <!-- Right Column (Schedule, Graph, Service Preview) -->
-                <div class="grid-right">
-                    
-                    <!-- Calendar / Schedule Widget -->
-                    <div class="card schedule-card">
-                        <div class="card-header">
-                            <h3>My Schedule</h3>
-                            <a href="/services-finder/provider/views/schedule.php" class="view-all">View all &rarr;</a>
-                        </div>
-                        <div class="calendar-preview">
-                            <div class="calendar-days-header">
-                                <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-                            </div>
-                            <div class="calendar-days-grid">
-                                <span>29</span><span>30</span><span>31</span><span>1</span><span>2</span><span>3</span><span>4</span>
-                                <span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span>
-                                <span>12</span><span>13</span><span>14</span><span>15</span><span class="active-day">16</span><span>17</span><span>18</span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Earnings Graph Widget -->
-                    <div class="card earnings-card">
-                        <div class="card-header">
-                            <h3>Earnings Graph</h3>
-                        </div>
-                        <div class="graph-placeholder">
-                            <div class="line-chart-sim">
-                                <span style="height: 40%"></span>
-                                <span style="height: 65%"></span>
-                                <span style="height: 50%"></span>
-                                <span style="height: 85%"></span>
-                                <span style="height: 70%"></span>
-                                <span style="height: 95%"></span>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Page Content -->
+        <main class="provider-content">
 
-                    <!-- Service Manager Preview -->
-                    <div class="card service-manager-card">
-                        <div class="card-header">
-                            <h3>Service Manager <small>(Preview)</small></h3>
-                            <a href="/services-finder/provider/views/services.php" class="view-all">See all &rarr;</a>
-                        </div>
-                        <div class="service-preview-item">
-                            <div class="service-info">
-                                <span>🛠️ A/C Installation</span>
-                            </div>
-                            <strong>TSh 120,000</strong>
-                        </div>
-                    </div>
+            <?php
 
-                </div>
+            if (file_exists($viewPath)) {
 
-            </div>
+                require $viewPath;
 
-        </div>
-    </main>
+            } else {
+
+                /*
+                 * Temporary fallback.
+                 *
+                 * Once home.php and the other view files
+                 * exist, this will no longer be shown.
+                 */
+
+                ?>
+
+                <section class="dashboard-placeholder">
+
+                    <h1>
+                        <?= htmlspecialchars(ucfirst($page)) ?>
+                    </h1>
+
+                    <p>
+                        This section is ready to be connected
+                        to the FindPro data layer.
+                    </p>
+
+                </section>
+
+                <?php
+            }
+
+            ?>
+
+        </main>
+
+
+        <!-- Footer -->
+        <footer class="provider-footer">
+
+            <?php
+
+            if (file_exists($footerPath)) {
+                require $footerPath;
+            }
+
+            ?>
+
+        </footer>
+
+
+    </div>
+
 </div>
 
+
+<script src="../assets/js/provider-dashboard.js"></script>
+
 </body>
+
 </html>
