@@ -1,146 +1,380 @@
-<?php
-$userName = $_SESSION['full_name'] ?? 'Client';
-?>
+<section class="dashboard-home">
 
-<!-- HERO SECTION -->
-<section class="hero-section">
-    <div class="hero-container">
-        <div class="hero-left">
-            <div class="hero-badge">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>VERIFIED LOCAL PROFESSIONALS</span>
-            </div>
+    <!-- PAGE TITLE -->
 
-            <h1>What service are you looking for today?</h1>
+    <div class="dashboard-heading">
+
+        <div>
+
+            <h1>Dashboard</h1>
+
             <p>
-                Find trusted professionals near your location. Search, compare profiles, and hire with confidence.
+                Manage your services, bookings and grow your business.
             </p>
 
-            <form class="hero-search-form" action="#" method="GET">
-                <div class="search-input-group">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" name="query" placeholder="Search electrician, plumber, tutor...">
-                </div>
-                <button type="submit" class="btn-search">Search</button>
-            </form>
+        </div>
 
-            <div class="popular-tags">
-                <span class="tag-title">Popular:</span>
-                <a href="#" class="tag-chip">Electrician</a>
-                <a href="#" class="tag-chip">Plumber</a>
-                <a href="#" class="tag-chip">Mechanic</a>
-                <a href="#" class="tag-chip">Cleaner</a>
+    </div>
+
+
+    <!-- PROVIDER PROFILE CARD -->
+
+    <section class="provider-overview-card">
+
+        <div class="provider-info">
+
+            <div class="provider-avatar">
+
+                <img
+                    src="../assets/images/msagambegu.jpg"
+                    alt="Provider"
+                >
+
             </div>
-        </div>
 
-        <div class="hero-right">
-            <div class="provider-preview-card">
-                <div class="status-badge online">
-                    <span class="status-dot"></span> Available Today
-                </div>
 
-                <div class="preview-avatar">
-                    <img src="../../assets/images/mshandete.webp" alt="John Michael" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=John+Michael&background=10b981&color=fff';">
-                </div>
+            <div class="provider-details">
 
-                <h3>John Michael</h3>
-                <p class="profession-subtitle">Professional Electrician</p>
+                <div class="provider-name-row">
 
-                <div class="preview-meta">
-                    <span class="meta-item rating">
-                        <i class="fa-solid fa-star"></i> 4.9
+                    <h2>Paschal Mshandete</h2>
+
+                    <span class="verified-badge">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Verified Provider
+
                     </span>
-                    <span class="meta-item location">
-                        <i class="fa-solid fa-location-dot"></i> 1.2 km
-                    </span>
+
                 </div>
 
-                <a href="#" class="btn-preview-profile">View Profile</a>
+
+                <p class="provider-service">
+
+                    Plumbing Services
+
+                </p>
+
+
+                <p class="provider-location">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    Dar es Salaam, Tanzania
+
+                </p>
+
+
+                <p class="provider-rating">
+
+                    <i class="fa-solid fa-star"></i>
+
+                    4.8
+
+                    <span>
+                        (128 reviews)
+                    </span>
+
+                </p>
+
             </div>
+
         </div>
-    </div>
-</section>
 
-<!-- QUICK CATEGORIES SECTION -->
-<section class="categories-section">
-    <div class="section-header">
-        <h2>Browse Categories</h2>
-        <p>Explore the most requested services.</p>
-    </div>
 
-    <div class="categories-grid">
-        <a href="#" class="category-card">
-            <div class="icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
-            <span>Electrician</span>
-        </a>
-        <a href="#" class="category-card">
-            <div class="icon-wrapper"><i class="fa-solid fa-faucet-drip"></i></div>
-            <span>Plumber</span>
-        </a>
-        <a href="#" class="category-card">
-            <div class="icon-wrapper"><i class="fa-solid fa-car"></i></div>
-            <span>Mechanic</span>
-        </a>
-        <a href="#" class="category-card">
-            <div class="icon-wrapper"><i class="fa-solid fa-paint-roller"></i></div>
-            <span>Painter</span>
-        </a>
-        <a href="#" class="category-card">
-            <div class="icon-wrapper"><i class="fa-solid fa-laptop-code"></i></div>
-            <span>IT Support</span>
-        </a>
-        <a href="#" class="category-card">
-            <div class="icon-wrapper"><i class="fa-solid fa-broom"></i></div>
-            <span>Cleaner</span>
-        </a>
-        <a href="#" class="category-card">
-            <div class="icon-wrapper"><i class="fa-solid fa-scissors"></i></div>
-            <span>Salon</span>
-        </a>
-        <a href="#" class="category-card">
-            <div class="icon-wrapper"><i class="fa-solid fa-graduation-cap"></i></div>
-            <span>Tutor</span>
-        </a>
-    </div>
-</section>
+        <div class="profile-progress">
 
-<!-- FEATURED PROFESSIONALS SECTION -->
-<section class="featured-section">
-    <div class="section-header flex-header">
-        <div>
-            <h2>Featured Professionals</h2>
-            <p>Highly rated professionals available today.</p>
+            <div class="progress-info">
+
+                <div>
+
+                    <span>Profile Status</span>
+
+                    <strong>100% Completed</strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    style="width: 100%;"
+                ></div>
+
+            </div>
+
         </div>
-        <a href="#" class="link-view-all">View All <i></i></a>
-    </div>
 
-    <div class="featured-grid">
-        <?php for($i = 1; $i <= 6; $i++): ?>
-        <article class="pro-card">
-            <div class="pro-avatar-wrapper">
-                <!-- Hapa tulirekebisha 'rc' kuwa 'src' -->
-                <img src="assets/images/mshandete.webp" alt="John Michael" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=John+Michael&background=10b981&color=fff';">
-                <span class="verified-badge" title="Verified Professional">
-                    <i class="fa-solid fa-circle-check"></i>
+
+        <a
+            href="dashboard.php?page=profile"
+            class="edit-profile-btn"
+        >
+
+            <i class="fa-solid fa-pen"></i>
+
+            Edit Profile
+
+        </a>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+
+    <section class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon bookings-icon">
+
+                <i class="fa-regular fa-calendar"></i>
+
+            </div>
+
+
+            <div>
+
+                <span class="stat-label">
+
+                    Total Bookings
+
                 </span>
+
+
+                <h3>12</h3>
+
+
+                <small class="positive">
+
+                    +3 from last month
+
+                </small>
+
             </div>
 
-            <div class="pro-details">
-                <h3>John Michael</h3>
-                <span class="pro-badge">Electrician</span>
+        </div>
 
-                <div class="pro-meta-info">
-                    <span class="rating-info">
-                        <i class="fa-solid fa-star"></i> 4.9
-                    </span>
-                    <span class="location-info">
-                        <i class="fa-solid fa-location-dot"></i> Dar es Salaam
-                    </span>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon pending-icon">
+
+                <i class="fa-regular fa-clock"></i>
+
+            </div>
+
+
+            <div>
+
+                <span class="stat-label">
+
+                    Pending Requests
+
+                </span>
+
+
+                <h3>3</h3>
+
+
+                <small class="warning">
+
+                    +1 from last week
+
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon completed-icon">
+
+                <i class="fa-solid fa-check"></i>
+
+            </div>
+
+
+            <div>
+
+                <span class="stat-label">
+
+                    Completed Jobs
+
+                </span>
+
+
+                <h3>28</h3>
+
+
+                <small class="positive">
+
+                    +5 from last month
+
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon rating-icon">
+
+                <i class="fa-solid fa-star"></i>
+
+            </div>
+
+
+            <div>
+
+                <span class="stat-label">
+
+                    Rating
+
+                </span>
+
+
+                <h3>4.8</h3>
+
+
+                <small>
+
+                    From 128 reviews
+
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RECENT BOOKINGS -->
+
+    <section class="recent-bookings">
+
+        <div class="section-header">
+
+            <h2>Recent Booking Requests</h2>
+
+            <a href="dashboard.php?page=bookings">
+
+                View All
+
+            </a>
+
+        </div>
+
+
+        <div class="booking-list">
+
+
+            <div class="booking-row">
+
+                <div class="client-info">
+
+                    <img
+                        src="../assets/images/default-user.png"
+                        alt="Client"
+                    >
+
+                    <div>
+
+                        <strong>John Mwangi</strong>
+
+                        <span>Plumbing Repair</span>
+
+                    </div>
+
                 </div>
 
-                <a href="#" class="btn-card-action">View Profile</a>
+
+                <span class="booking-date">
+
+                    24 May 2026
+
+                </span>
+
+
+                <span class="status pending">
+
+                    Pending
+
+                </span>
+
+
+                <button class="view-btn">
+
+                    View
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
             </div>
-        </article>
-        <?php endfor; ?>
-    </div>
+
+
+
+            <div class="booking-row">
+
+                <div class="client-info">
+
+                    <img
+                        src="../assets/images/p.jpg"
+                        alt="Client"
+                    >
+
+                    <div>
+
+                        <strong>Anna Smith</strong>
+
+                        <span>Bathroom Cleaning</span>
+
+                    </div>
+
+                </div>
+
+
+                <span class="booking-date">
+
+                    23 May 2026
+
+                </span>
+
+
+                <span class="status accepted">
+
+                    Accepted
+
+                </span>
+
+
+                <button class="view-btn">
+
+                    View
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
 </section>

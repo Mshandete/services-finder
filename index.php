@@ -106,9 +106,9 @@ declare(strict_types=1);
             <!-- TRUST -->
             <div class="hero-trust">
                 <div class="trust-avatars">
-                    <span><img src="assets/images/h.jpg" alt="User avatar"></span>
-                    <span><img src="assets/images/f.jpg" alt="User avatar"></span>
-                    <span><img src="assets/images/i.jpg" alt="User avatar"></span>
+                    <span><img src="assets/images/i.jpg" alt="User avatar"></span>                    
+                    <span><img src="assets/images/msagambegu.jpg" alt="User avatar"></span>
+                    <span><img src="assets/images/mshandete.webp" alt="User avatar"></span>
                 </div>
                 <div class="trust-text">
                     <strong>Trusted by local users</strong>
@@ -121,7 +121,7 @@ declare(strict_types=1);
         <div class="hero-visual">
             <!-- Main Image -->
             <div class="hero-image-card">
-                <img src="assets/images/b.jpg" alt="Find a professional">
+                <img src="assets/images/msagambegu.jpg" alt="Find a professional">
                 <div class="image-overlay"></div>
 
                 <!-- Location Badge -->
