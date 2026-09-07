@@ -1,18 +1,33 @@
 <?php
-
 declare(strict_types=1);
-
-/*
-|--------------------------------------------------------------------------
-| FindPro Logout
-|--------------------------------------------------------------------------
-*/
 
 session_start();
 
 /*
 |--------------------------------------------------------------------------
-| Remove Remember Me Cookie
+| Clear Remember Token
+|--------------------------------------------------------------------------
+*/
+
+if (isset($_SESSION['user_id'])) {
+
+    require_once "../config/database.php";
+
+    $stmt = $pdo->prepare("
+        UPDATE users
+        SET remember_token = NULL
+        WHERE id = ?
+    ");
+
+    $stmt->execute([
+        $_SESSION['user_id']
+    ]);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Remove Remember Cookie
 |--------------------------------------------------------------------------
 */
 
@@ -21,22 +36,23 @@ if (isset($_COOKIE['remember_token'])) {
     setcookie(
         'remember_token',
         '',
-        [
-            'expires' => time() - 3600,
-            'path'     => '/',
-            'httponly' => true,
-            'samesite' => 'Lax'
-        ]
+        time() - 3600,
+        '/',
+        '',
+        false,
+        true
     );
 }
 
+
 /*
 |--------------------------------------------------------------------------
-| Clear Session Variables
+| Clear Session
 |--------------------------------------------------------------------------
 */
 
 $_SESSION = [];
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +60,7 @@ $_SESSION = [];
 |--------------------------------------------------------------------------
 */
 
-if (ini_get('session.use_cookies')) {
+if (ini_get("session.use_cookies")) {
 
     $params = session_get_cookie_params();
 
@@ -52,13 +68,13 @@ if (ini_get('session.use_cookies')) {
         session_name(),
         '',
         time() - 42000,
-        $params['path'],
-        $params['domain'],
-        $params['secure'],
-        $params['httponly']
+        $params["path"],
+        $params["domain"],
+        $params["secure"],
+        $params["httponly"]
     );
-
 }
+
 
 /*
 |--------------------------------------------------------------------------
@@ -68,17 +84,6 @@ if (ini_get('session.use_cookies')) {
 
 session_destroy();
 
-/*
-|--------------------------------------------------------------------------
-| Start Fresh Session
-|--------------------------------------------------------------------------
-*/
-
-session_start();
-
-session_regenerate_id(true);
-
-$_SESSION['success_message'] = "You have logged out successfully.";
 
 /*
 |--------------------------------------------------------------------------

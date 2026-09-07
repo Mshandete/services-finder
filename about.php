@@ -37,7 +37,7 @@
                     </p>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80" alt="About Us">
+                    <img src="assets/images/mshandete.webp" alt="About Us">
                 </div>
             </div>
         </div>
@@ -129,9 +129,9 @@
                 
                 <div class="team-card-v2 animate-bottom delay-1">
                     <div class="avatar-wrapper">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=500&q=80" alt="Founder">
+                        <img src="assets/images/msagambegu.jpg" alt="Founder">
                     </div>
-                    <h4>Kelvin Peter</h4>
+                    <h4>Paschal Mshandete</h4>
                     <span class="team-role">Mwanzilishi & Mkurugenzi</span>
                     <div class="team-socials">
                         <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -141,7 +141,7 @@
 
                 <div class="team-card-v2 animate-bottom delay-2">
                     <div class="avatar-wrapper">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80" alt="Operations">
+                        <img src="assets/images/q.jpg" alt="Operations">
                     </div>
                     <h4>Sarah Hassan</h4>
                     <span class="team-role">Mkuu wa Operesheni</span>

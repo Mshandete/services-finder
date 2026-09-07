@@ -107,11 +107,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     }
 
-    /* Create Account */
+/* Create Account */
 
-    if (empty($errors)) {
+if (empty($errors)) {
 
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $hashedPassword = password_hash(
+        $password,
+        PASSWORD_DEFAULT
+    );
+
+    try {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Start Transaction
+        |--------------------------------------------------------------------------
+        */
+
+        $pdo->beginTransaction();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Create User
+        |--------------------------------------------------------------------------
+        */
 
         $stmt = $pdo->prepare("
             INSERT INTO users
@@ -122,7 +141,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 password,
                 role
             )
-
             VALUES
             (
                 ?,
@@ -133,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             )
         ");
 
-        $registered = $stmt->execute([
+        $stmt->execute([
             $full_name,
             $email,
             $phone,
@@ -141,21 +159,75 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $role
         ]);
 
-        if ($registered) {
+        /*
+        |--------------------------------------------------------------------------
+        | Get Newly Created User ID
+        |--------------------------------------------------------------------------
+        */
 
-            $_SESSION['success_message'] =
-                "Registration successful. Please login.";
+        $userId = (int)$pdo->lastInsertId();
 
-            header("Location: login.php");
-            exit();
+        /*
+        |--------------------------------------------------------------------------
+        | Create Provider Profile Automatically
+        |--------------------------------------------------------------------------
+        */
 
-        } else {
+        if ($role === 'provider') {
 
-            $errors[] = "Something went wrong. Please try again.";
+            $profileStmt = $pdo->prepare("
+                INSERT INTO provider_profiles
+                (
+                    user_id
+                )
+                VALUES
+                (
+                    ?
+                )
+            ");
 
+            $profileStmt->execute([
+                $userId
+            ]);
         }
 
+        /*
+        |--------------------------------------------------------------------------
+        | Commit Transaction
+        |--------------------------------------------------------------------------
+        */
+
+        $pdo->commit();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Registration Success
+        |--------------------------------------------------------------------------
+        */
+
+        $_SESSION['success_message'] =
+            "Registration successful. Please login.";
+
+        header("Location: login.php");
+        exit();
+
+
+    } catch (Throwable $e) {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Rollback If Something Fails
+        |--------------------------------------------------------------------------
+        */
+
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+
+        $errors[] =
+            "Registration failed. Please try again.";
     }
+}
 
 }
 ?>
@@ -164,13 +236,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Account | FindPro</title>
-<link rel="stylesheet" href="../assets/css/register.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | FindPro</title>
+    <link rel="stylesheet" href="../assets/css/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 
 <body>
@@ -180,9 +250,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="register-card">
 
         <div class="logo">
-
         <h1>Find<span>Pro</span></h1>
-
         <p>Create your account</p>
 
         </div>
@@ -192,48 +260,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="alert error">
 
         <ul>
-
         <?php foreach($errors as $error): ?>
-
         <li><?= htmlspecialchars($error) ?></li>
-
         <?php endforeach; ?>
-
         </ul>
-
     </div>
 
 <?php endif; ?>
 
 <form action="" method="POST" class="register-form">
-
     <div class="form-group">
         <label for="full_name">
             <i class="fas fa-user"></i> Full Name
         </label>
-
-        <input
-            type="text"
-            id="full_name"
-            name="full_name"
-            placeholder="Enter your full name"
-            value="<?= htmlspecialchars($full_name) ?>"
-            required>
+        <input type="text" id="full_name" name="full_name" placeholder="Enter your full name" value="<?= htmlspecialchars($full_name) ?>" required>
     </div>
-
 
     <div class="form-group">
         <label for="email">
             <i class="fas fa-envelope"></i> Email Address
         </label>
-
-        <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="example@email.com"
-            value="<?= htmlspecialchars($email) ?>"
-            required>
+        <input type="email" id="email" name="email" placeholder="example@email.com" value="<?= htmlspecialchars($email) ?>" required>
     </div>
 
 
@@ -241,162 +288,87 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="phone">
             <i class="fas fa-phone"></i> Phone Number
         </label>
-
-        <input
-            type="text"
-            id="phone"
-            name="phone"
-            placeholder="07XXXXXXXX"
-            value="<?= htmlspecialchars($phone) ?>"
-            required>
+        <input type="text" id="phone" name="phone" placeholder="07XXXXXXXX" value="<?= htmlspecialchars($phone) ?>" required>
     </div>
 
-
     <div class="form-group">
-
         <label for="role">
             <i class="fas fa-users"></i>
             Account Type
         </label>
 
-        <select
-            id="role"
-            name="role"
-            required>
-
+        <select id="role" name="role" required>
             <option value="">Select Account Type</option>
-
-            <option
-                value="client"
+            <option value="client"
                 <?= ($role=="client") ? "selected" : "" ?>>
                 Client
             </option>
 
-            <option
-                value="provider"
+            <option value="provider"
                 <?= ($role=="provider") ? "selected" : "" ?>>
                 Service Provider
             </option>
-
         </select>
-
     </div>
 
-
     <div class="form-group">
-
         <label for="password">
             <i class="fas fa-lock"></i>
             Password
         </label>
 
         <div class="password-box">
-
-            <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Minimum 8 characters"
-                required>
-
-            <i
-                class="fas fa-eye toggle-password"
-                onclick="togglePassword('password',this)">
-            </i>
-
+            <input type="password" id="password" name="password" placeholder="Minimum 8 characters" required>
+            <i class="fas fa-eye toggle-password" onclick="togglePassword('password',this)"></i>
         </div>
-
     </div>
 
-
     <div class="form-group">
-
         <label for="confirm_password">
             <i class="fas fa-lock"></i>
             Confirm Password
         </label>
 
         <div class="password-box">
-
-            <input
-                type="password"
-                id="confirm_password"
-                name="confirm_password"
-                placeholder="Repeat password"
-                required>
-
-            <i
-                class="fas fa-eye toggle-password"
-                onclick="togglePassword('confirm_password',this)">
-            </i>
-
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Repeat password" required>
+            <i class="fas fa-eye toggle-password" onclick="togglePassword('confirm_password',this)"></i>
         </div>
-
     </div>
 
-
-    <button
-        type="submit"
-        class="register-btn">
-
+    <button type="submit" class="register-btn">
         <i class="fas fa-user-plus"></i>
         Create Account
-
     </button>
-
-
 </form>
 
-
 <div class="login-link">
-
     Already have an account?
-
-    <a href="login.php">
-
-        Login Here
-
-    </a>
-
+    <a href="login.php">Login Here</a>
 </div>
 
 </div>
 
 </div>
-
 
 <script>
-
 function togglePassword(id, icon)
 {
-
     let input = document.getElementById(id);
-
     if(input.type==="password")
     {
-
         input.type="text";
-
         icon.classList.remove("fa-eye");
-
         icon.classList.add("fa-eye-slash");
-
     }
     else
     {
-
         input.type="password";
-
         icon.classList.remove("fa-eye-slash");
-
         icon.classList.add("fa-eye");
-
     }
-
 }
 
 </script>
-
 </body>
 
 </html>

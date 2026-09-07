@@ -24,12 +24,7 @@ $currentPage = $_GET['page'] ?? 'home';
             </a>
 
 
-            <button
-                type="button"
-                class="provider-sidebar-close"
-                id="closeSidebar"
-                aria-label="Close navigation"
-            >
+            <button type="button" class="provider-sidebar-close" id="closeSidebar" aria-label="Close navigation">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
@@ -53,10 +48,7 @@ $currentPage = $_GET['page'] ?? 'home';
                         <span class="provider-nav-icon">
                             <i class="fa-solid fa-house"></i>
                         </span>
-
-                        <span class="provider-nav-label">
-                            Dashboard
-                        </span>
+                        <span class="provider-nav-label">Dashboard</span>
 
                     </a>
 
@@ -65,106 +57,57 @@ $currentPage = $_GET['page'] ?? 'home';
 
                 <!-- MY SERVICES -->
                 <li>
-
-                    <a
-                        href="dashboard.php?page=services"
-                        class="provider-nav-link <?= $currentPage === 'services' ? 'active' : '' ?>"
-                    >
-
+                    <a href="dashboard.php?page=services" class="provider-nav-link <?= $currentPage === 'services' ? 'active' : '' ?>">
                         <span class="provider-nav-icon">
                             <i class="fa-solid fa-briefcase"></i>
                         </span>
-
-                        <span class="provider-nav-label">
-                            My Services
-                        </span>
-
+                        <span class="provider-nav-label">My Services</span>
                     </a>
-
                 </li>
 
 
                 <!-- BOOKINGS -->
                 <li>
-
-                    <a
-                        href="dashboard.php?page=bookings"
-                        class="provider-nav-link <?= $currentPage === 'bookings' ? 'active' : '' ?>"
-                    >
-
+                    <a href="dashboard.php?page=bookings" class="provider-nav-link <?= $currentPage === 'bookings' ? 'active' : '' ?>">
                         <span class="provider-nav-icon">
                             <i class="fa-regular fa-calendar"></i>
                         </span>
-
-                        <span class="provider-nav-label">
-                            Bookings
-                        </span>
-
+                        <span class="provider-nav-label">Bookings</span>
                     </a>
-
                 </li>
 
 
                 <!-- MESSAGES -->
                 <li>
-
-                    <a
-                        href="dashboard.php?page=messages"
-                        class="provider-nav-link <?= $currentPage === 'messages' ? 'active' : '' ?>"
-                    >
-
+                    <a href="dashboard.php?page=messages" class="provider-nav-link <?= $currentPage === 'messages' ? 'active' : '' ?>">
                         <span class="provider-nav-icon">
                             <i class="fa-regular fa-comment"></i>
                         </span>
-
-                        <span class="provider-nav-label">
-                            Messages
-                        </span>
-
+                        <span class="provider-nav-label">Messages</span>
                     </a>
-
                 </li>
 
 
                 <!-- PROFILE -->
                 <li>
-
-                    <a
-                        href="dashboard.php?page=profile"
-                        class="provider-nav-link <?= $currentPage === 'profile' ? 'active' : '' ?>"
-                    >
-
+                    <a href="dashboard.php?page=profile" class="provider-nav-link <?= $currentPage === 'profile' ? 'active' : '' ?>">
                         <span class="provider-nav-icon">
                             <i class="fa-regular fa-user"></i>
                         </span>
-
-                        <span class="provider-nav-label">
-                            Profile
-                        </span>
-
+                        <span class="provider-nav-label">Profile</span>
                     </a>
-
                 </li>
 
 
                 <!-- SETTINGS -->
                 <li>
 
-                    <a
-                        href="dashboard.php?page=settings"
-                        class="provider-nav-link <?= $currentPage === 'settings' ? 'active' : '' ?>"
-                    >
-
+                    <a href="dashboard.php?page=settings" class="provider-nav-link <?= $currentPage === 'settings' ? 'active' : '' ?>">
                         <span class="provider-nav-icon">
                             <i class="fa-solid fa-gear"></i>
                         </span>
-
-                        <span class="provider-nav-label">
-                            Settings
-                        </span>
-
+                        <span class="provider-nav-label">Settings</span>
                     </a>
-
                 </li>
 
             </ul>
@@ -177,21 +120,10 @@ $currentPage = $_GET['page'] ?? 'home';
 
             <div class="provider-sidebar-divider"></div>
 
-            <a
-                href="../logout.php"
-                class="provider-logout"
-            >
-
-                <span class="provider-nav-icon">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                </span>
-
-                <span class="provider-nav-label">
-                    Logout
-                </span>
-
-            </a>
-
+                <a href="../auth/logout.php" class="sidebar-logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
         </div>
 
     </div>
@@ -200,7 +132,4 @@ $currentPage = $_GET['page'] ?? 'home';
 
 
 <!-- MOBILE OVERLAY -->
-<div
-    class="provider-sidebar-overlay"
-    id="sidebarOverlay"
-></div>
+<div class="provider-sidebar-overlay" id="sidebarOverlay"> </div>

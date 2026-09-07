@@ -270,7 +270,7 @@ declare(strict_types=1);
             <!-- Provider 1 -->
             <a href="#" class="professional-card">
                 <div class="professional-image">
-                    <img src="assets/images/h.jpg" alt="Service provider">
+                    <img src="assets/images/msagambegu.jpg" alt="Service provider">
                     <span class="verified-badge">
                         <i class="fa-solid fa-check"></i> Verified
                     </span>
@@ -301,7 +301,7 @@ declare(strict_types=1);
                 <div class="professional-info">
                     <div class="professional-top">
                         <div>
-                            <h3>Niwael Mavella</h3>
+                            <h3>Lenard Ndaro</h3>
                             <span>Engineer</span>
                         </div>
                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -347,7 +347,7 @@ declare(strict_types=1);
                 <div class="professional-info">
                     <div class="professional-top">
                         <div>
-                            <h3>Godad Machumu</h3>
+                            <h3>Niwael Mavella</h3>
                             <span>Engineer</span>
                         </div>
                         <i class="fa-solid fa-arrow-up-right-from-square"></i>

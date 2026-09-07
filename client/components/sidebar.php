@@ -1,114 +1,251 @@
 <?php
-$currentPage = $_GET['page'] ?? 'home';
 
-function active($page, $currentPage){
-    return $page === $currentPage ? 'active' : '';
-}
+/*
+|--------------------------------------------------------------------------
+| CLIENT SIDEBAR
+|--------------------------------------------------------------------------
+|
+| This component is loaded by:
+|
+| client/dashboard.php
+|
+| It uses the $page variable from the dashboard router
+| to determine the active navigation item.
+|
+*/
+
+$currentPage = $page ?? 'home';
+
 ?>
 
-<aside class="sidebar">
+<aside
+    class="client-sidebar"
+    id="clientSidebar"
+>
 
-    <!-- Logo -->
+
+    <!-- =================================================
+         SIDEBAR LOGO
+    ================================================= -->
+
     <div class="sidebar-logo">
 
         <a href="dashboard.php?page=home">
 
-            <img src="../assets/images/msagambegu.jpg" alt="FindPro Logo">
+            <div class="logo-icon">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+            </div>
+
 
             <div class="logo-text">
-                <h2>FindPro</h2>
-                <span>Service Finder</span>
+
+                <h2>
+                    Find<span>Pro</span>
+                </h2>
+
+                <p>
+                    Find trusted professionals
+                </p>
+
             </div>
 
         </a>
 
     </div>
 
-    <!-- Menu -->
-    <nav class="sidebar-menu">
 
-        <ul>
 
-            <li>
-                <a href="dashboard.php?page=home" class="<?= active('home',$currentPage); ?>">
-                    <i class="bi bi-grid-1x2-fill"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
+    <!-- =================================================
+         SIDEBAR NAVIGATION
+    ================================================= -->
 
-            <li>
-                <a href="dashboard.php?page=services" class="<?= active('services',$currentPage); ?>">
-                    <i class="bi bi-search"></i>
-                    <span>Find Services</span>
-                </a>
-            </li>
+    <nav class="sidebar-navigation">
 
-            <li>
-                <a href="dashboard.php?page=bookings" class="<?= active('bookings',$currentPage); ?>">
-                    <i class="bi bi-calendar-check"></i>
-                    <span>Bookings</span>
-                </a>
-            </li>
 
-            <li>
-                <a href="dashboard.php?page=favorites" class="<?= active('favorites',$currentPage); ?>">
-                    <i class="bi bi-heart"></i>
-                    <span>Favorites</span>
-                </a>
-            </li>
+        <!-- HOME -->
 
-            <li>
-                <a href="dashboard.php?page=messages" class="<?= active('messages',$currentPage); ?>">
-                    <i class="bi bi-chat-dots"></i>
-                    <span>Messages</span>
-                </a>
-            </li>
+        <a
+            href="dashboard.php?page=home"
+            class="sidebar-link <?= $currentPage === 'home' ? 'active' : ''; ?>"
+        >
 
-            <li>
-                <a href="dashboard.php?page=profile" class="<?= active('profile',$currentPage); ?>">
-                    <i class="bi bi-person"></i>
-                    <span>Profile</span>
-                </a>
-            </li>
+            <i class="fa-solid fa-house"></i>
 
-            <li>
-                <a href="dashboard.php?page=settings" class="<?= active('settings',$currentPage); ?>">
-                    <i class="bi bi-gear"></i>
-                    <span>Settings</span>
-                </a>
-            </li>
+            <span>Home</span>
 
-        </ul>
+        </a>
+
+
+
+        <!-- FIND SERVICES -->
+
+        <a
+            href="dashboard.php?page=services"
+            class="sidebar-link <?= $currentPage === 'services' ? 'active' : ''; ?>"
+        >
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <span>Find Services</span>
+
+        </a>
+
+
+
+        <!-- BOOKINGS -->
+
+        <a
+            href="dashboard.php?page=bookings"
+            class="sidebar-link <?= $currentPage === 'bookings' ? 'active' : ''; ?>"
+        >
+
+            <i class="fa-solid fa-calendar-check"></i>
+
+            <span>My Bookings</span>
+
+        </a>
+
+
+
+        <!-- FAVORITES -->
+
+        <a
+            href="dashboard.php?page=favorites"
+            class="sidebar-link <?= $currentPage === 'favorites' ? 'active' : ''; ?>"
+        >
+
+            <i class="fa-solid fa-heart"></i>
+
+            <span>Favorites</span>
+
+        </a>
+
+
+
+        <!-- MESSAGES -->
+
+        <a
+            href="dashboard.php?page=messages"
+            class="sidebar-link <?= $currentPage === 'messages' ? 'active' : ''; ?>"
+        >
+
+            <i class="fa-solid fa-comment-dots"></i>
+
+            <span>Messages</span>
+
+
+            <!--
+                Message badge can later be connected
+                to unread messages from the database.
+            -->
+
+            <!--
+            <span class="menu-badge">
+                3
+            </span>
+            -->
+
+        </a>
+
 
     </nav>
 
-    <!-- Bottom -->
-    <div class="sidebar-bottom">
 
-        <div class="help-card">
 
-            <div class="help-icon">
-                <i class="bi bi-headset"></i>
-            </div>
+    <!-- =================================================
+         SIDEBAR DIVIDER
+    ================================================= -->
 
-            <h4>Need Help?</h4>
+    <div class="sidebar-divider"></div>
 
-            <p>Contact our support team anytime.</p>
 
-            <a href="#" class="btn btn-primary btn-sm">
-                Contact Us
-            </a>
 
-        </div>
+    <!-- =================================================
+         ACCOUNT NAVIGATION
+    ================================================= -->
 
-        <a href="../auth/logout.php" class="logout-btn">
+    <nav class="sidebar-navigation sidebar-account-navigation">
 
-            <i class="bi bi-box-arrow-right"></i>
 
-            <span>Logout</span>
+        <!-- PROFILE -->
+
+        <a
+            href="dashboard.php?page=profile"
+            class="sidebar-link <?= $currentPage === 'profile' ? 'active' : ''; ?>"
+        >
+
+            <i class="fa-solid fa-user"></i>
+
+            <span>My Profile</span>
 
         </a>
 
+
+
+        <!-- SETTINGS -->
+
+        <a
+            href="dashboard.php?page=settings"
+            class="sidebar-link <?= $currentPage === 'settings' ? 'active' : ''; ?>"
+        >
+
+            <i class="fa-solid fa-gear"></i>
+
+            <span>Settings</span>
+
+        </a>
+
+
+    </nav>
+
+
+
+    <!-- =================================================
+         SIDEBAR BOTTOM
+    ================================================= -->
+
+    <div class="sidebar-bottom">
+
+
+        <!-- SUPPORT CARD -->
+
+        <div class="support-card">
+
+
+            <div class="support-icon">
+
+                <i class="fa-solid fa-headset"></i>
+
+            </div>
+
+
+            <h3>
+                Need Help?
+            </h3>
+
+
+            <p>
+                Our support team is ready
+                to help you.
+            </p>
+
+
+            <a
+                href="#"
+                class="support-button"
+            >
+
+                Contact Support
+
+            </a>
+
+
+        </div>
+
+
     </div>
+
 
 </aside>

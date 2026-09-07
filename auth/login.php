@@ -199,13 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <i class="fas fa-user"></i>
                     Email or Phone
                 </label>
-                <input
-                    type="text"
-                    id="login"
-                    name="login"
-                    placeholder="Enter your email or phone"
-                    value="<?= htmlspecialchars($login) ?>"
-                    required>
+                <input type="text" id="login" name="login" placeholder="Enter your email or phone" value="<?= htmlspecialchars($login) ?>"required>
             </div>
 
             <div class="form-group">

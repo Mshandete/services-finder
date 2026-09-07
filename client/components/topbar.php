@@ -1,82 +1,84 @@
 <?php
-
-$userName = $_SESSION['full_name'] ?? 'Client';
-$userImage = $_SESSION['profile_image'] ?? '../assets/images/mavella.jpg';
-
+$currentPage = $page ?? 'home';
 ?>
 
-<header class="topbar">
+<header class="client-topbar">
 
-    <div class="topbar-left">
-
-        <button class="menu-toggle" id="menuToggle">
-
-            <i class="bi bi-list"></i>
-
+    <!-- Mobile Brand -->
+    <div class="mobile-brand">
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="menuToggle"
+            aria-label="Open menu"
+        >
+            <i class="fa-solid fa-bars"></i>
         </button>
 
-        <div class="page-title">
-
-            <h2>Welcome Back 👋</h2>
-
-            <span>Find trusted professionals near you.</span>
-
-        </div>
-
+        <a href="dashboard.php?page=home" class="mobile-logo">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Find<span>Pro</span></span>
+        </a>
     </div>
 
-    <div class="topbar-center">
+    <!-- Search -->
+    <form class="top-search" action="dashboard.php" method="GET">
+        <input type="hidden" name="page" value="services">
 
-        <form class="top-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
 
-            <i class="bi bi-search"></i>
+        <input
+            type="search"
+            name="search"
+            placeholder="Search for services or providers..."
+            autocomplete="off"
+        >
+    </form>
 
-            <input
-                type="text"
-                placeholder="Search plumber, electrician, cleaner..."
-            >
+    <!-- Location -->
+    <button type="button" class="location-selector">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>My Location</span>
+        <i class="fa-solid fa-chevron-down"></i>
+    </button>
 
-        </form>
+    <!-- Actions -->
+    <div class="top-actions">
 
-    </div>
+        <!-- Notifications -->
+        <button
+            type="button"
+            class="top-icon-button notification-button"
+            aria-label="Notifications"
+        >
+            <i class="fa-regular fa-bell"></i>
 
-    <div class="topbar-right">
-
-        <button class="icon-btn notify">
-
-            <i class="bi bi-bell"></i>
-
+            <!-- Later: connect unread notifications -->
+            <!--
+            <span class="top-badge">3</span>
+            -->
         </button>
 
-        <button class="icon-btn">
-
-            <i class="bi bi-chat-dots"></i>
-
-        </button>
-
-        <button class="icon-btn">
-
-            <i class="bi bi-gear"></i>
-
-        </button>
-
-        <div class="user-dropdown">
-
-            <img
-                src="<?= htmlspecialchars($userImage); ?>"
-                alt="User">
-
-            <div class="user-details">
-
-                <h4><?= htmlspecialchars($userName); ?></h4>
-
-                <span>Client Account</span>
-
+        <!-- User Profile -->
+        <a
+            href="dashboard.php?page=profile"
+            class="user-menu"
+            aria-label="My Profile"
+        >
+            <div class="user-avatar">
+                <img
+                    src="../assets/images/default-avatar.png"
+                    alt="Profile"
+                >
             </div>
 
-            <i class="bi bi-chevron-down"></i>
+            <div class="user-info">
+                <strong>My Account</strong>
+                <span>Client</span>
+            </div>
 
-        </div>
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
 
     </div>
 
