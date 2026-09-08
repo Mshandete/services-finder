@@ -1,257 +1,197 @@
-<section class="hero fade-up">
-    <div class="hero-left">
-        <span class="hero-badge">
-            <i class="bi bi-patch-check-fill"></i>
-            Trusted Professionals Across Tanzania
-        </span>
-        <h1>
-            Find Skilled Professionals
-            <br>
-            Near You Anytime.
-        </h1>
-        <p>
-            FindPro helps you discover trusted plumbers, electricians,
-            mechanics, cleaners, tutors, photographers and many more
-            verified professionals around your location.
-        </p>
-        <form class="hero-search">
-            <div class="search-item">
-                <i class="bi bi-search"></i>
-                <input type="text" placeholder="What service do you need?">
+<section class="client-hero">
+    <div class="hero-content">
+        <div class="hero-label">
+            <i class="fa-solid fa-location-crosshairs"></i>
+            <span>Find trusted professionals near you</span>
+        </div>
+
+        <div class="hero-text">
+            <h1>Find the right professional for every job.</h1>
+            <p>Discover trusted service providers, compare their profiles and connect with the right professional for your needs.</p>
+        </div>
+
+        <form class="hero-search" action="dashboard.php" method="GET">
+            <input type="hidden" name="page" value="services">
+
+            <div class="hero-search-input">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" name="search" placeholder="What service are you looking for?" autocomplete="off">
             </div>
-            <div class="search-item">
-                <i class="bi bi-geo-alt"></i>
-                <input type="text" placeholder="Current Location">
-            </div>
-            <button class="btn btn-primary">
-                <i class="bi bi-search"></i>
+
+            <button type="submit" class="hero-search-button">
                 Search
             </button>
         </form>
-        <div class="popular-search">
-            <span>Popular :</span>
-            <a href="#">Electrician</a>
-            <a href="#">Plumber</a>
-            <a href="#">Cleaner</a>
-            <a href="#">Mechanic</a>
-            <a href="#">Painter</a>
-        </div>
-        <div class="hero-buttons">
-            <a href="#" class="btn btn-primary">Find Services</a>
-            <a href="#" class="btn btn-outline">Become Provider</a>
-        </div>
-        <div class="hero-stats">
-            <div class="stat-box">
-                <h2>5K+</h2>
-                <span>Professionals</span>
-            </div>
-            <div class="stat-box">
-                <h2>18K+</h2>
-                <span>Completed Jobs</span>
-            </div>
-            <div class="stat-box">
-                <h2>4.9★</h2>
-                <span>Average Rating</span>
-            </div>
-        </div>
     </div>
-    <div class="hero-right">
-        <div class="hero-image">
-            <img src="../assets/images/q.jpg" alt="FindPro Hero">
-        </div>
-        <div class="floating-card card-one">
-            <i class="bi bi-patch-check-fill"></i>
-            <div>
-                <strong>Verified Provider</strong>
-                <small>John Plumbing</small>
-            </div>
-        </div>
-        <div class="floating-card card-two">
-            <i class="bi bi-star-fill"></i>
-            <div>
-                <strong>4.9 Rating</strong>
-                <small>2,540 Reviews</small>
-            </div>
-        </div>
-        <div class="floating-card card-three">
-            <i class="bi bi-lightning-charge-fill"></i>
-            <div>
-                <strong>Available Now</strong>
-                <small>5 Minutes Away</small>
-            </div>
-        </div>
+
+    <div class="hero-image">
+        <img src="../assets/images/client-hero.jpg" alt="Find professional services">
     </div>
 </section>
 
-
-<section class="section reveal">
+<section class="dashboard-section services-section">
     <div class="section-header">
         <div>
-            <h2 class="section-title">Featured Professionals</h2>
-            <p class="section-subtitle">Trusted professionals selected for you.</p>
+            <h2>Popular Services</h2>
+            <p>Explore services available from trusted professionals.</p>
         </div>
-        <a href="dashboard.php?page=services" class="section-link">View All <i class="bi bi-arrow-right"></i></a>
+
+        <a href="dashboard.php?page=services" class="section-link">
+            View all
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <div class="services-grid">
+        <?php if (!empty($categories)): ?>
+            <?php foreach ($categories as $category): ?>
+                <a href="dashboard.php?page=services&category=<?= (int) $category['id']; ?>" class="service-card">
+                    <div class="service-icon">
+                        <?php if (!empty($category['category_icon'])): ?>
+                            <i class="<?= htmlspecialchars($category['category_icon']); ?>"></i>
+                        <?php else: ?>
+                            <i class="fa-solid fa-layer-group"></i>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="service-card-info">
+                        <span><?= htmlspecialchars($category['category_name']); ?></span>
+                        <small>
+                            <?= (int) $category['provider_count']; ?>
+                            <?= (int) $category['provider_count'] === 1 ? 'provider' : 'providers'; ?>
+                        </small>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="empty-state">
+                <i class="fa-solid fa-layer-group"></i>
+                <p>No services available yet.</p>
+            </div>
+        <?php endif; ?>
+    </div>
+</section>
+
+<section class="dashboard-section providers-section">
+    <div class="section-header">
+        <div>
+            <h2>Recommended Providers</h2>
+            <p>Professionals selected based on availability, trust and experience.</p>
+        </div>
+
+        <a href="dashboard.php?page=services" class="section-link">
+            View all
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
     </div>
 
     <div class="providers-grid">
+        <?php if (!empty($recommendedProviders)): ?>
+            <?php foreach ($recommendedProviders as $provider): ?>
+                <?php
+                $profileImage = !empty($provider['profile_image'])
+                    ? $provider['profile_image']
+                    : 'default.jpg';
 
-        <article class="provider-card reveal-item">
-            <div class="provider-image">
-                <img src="../assets/images/p.jpg" alt="John Plumbing Services">
-                <button class="favorite-btn" type="button" aria-label="Add John Plumbing to favorites">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>
-            </div>
-            <div class="provider-body">
-                <div class="provider-rating">
-                    <span><i class="bi bi-star-fill"></i> 4.9</span>
-                    <span><i class="bi bi-geo-alt"></i> Kimara</span>
-                </div>
-                <h3>John Plumbing Services</h3>
-                <p>Plumbing Specialist</p>
-                <a href="dashboard.php?page=provider&id=1" class="profile-btn">View Profile <i class="bi bi-arrow-right"></i></a>
-            </div>
-        </article>
+                $coverImage = !empty($provider['cover_image'])
+                    ? $provider['cover_image']
+                    : 'default-cover.jpg';
 
-        <article class="provider-card reveal-item">
-            <div class="provider-image">
-                <img src="../assets/images/i.jpg" alt="Amani Electrical Services">
-                <button class="favorite-btn" type="button" aria-label="Add Amani Electrical to favorites">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>
-            </div>
-            <div class="provider-body">
-                <div class="provider-rating">
-                    <span><i class="bi bi-star-fill"></i> 4.8</span>
-                    <span><i class="bi bi-geo-alt"></i> Sinza</span>
-                </div>
-                <h3>Amani Electrical</h3>
-                <p>Electrical Specialist</p>
-                <a href="dashboard.php?page=provider&id=2" class="profile-btn">View Profile <i></i></a>
-            </div>
-        </article>
+                $services = !empty($provider['services'])
+                    ? explode(', ', $provider['services'])
+                    : [];
+                ?>
 
-        <article class="provider-card reveal-item">
-            <div class="provider-image">
-                <img src="../assets/images/h.jpg" alt="CleanPro Services">
-                <button class="favorite-btn" type="button" aria-label="Add CleanPro to favorites">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>
-            </div>
-            <div class="provider-body">
-                <div class="provider-rating">
-                    <span><i class="bi bi-star-fill"></i> 4.9</span>
-                    <span><i class="bi bi-geo-alt"></i> Mikocheni</span>
-                </div>
-                <h3>CleanPro Services</h3>
-                <p>Cleaning Specialist</p>
-                <a href="dashboard.php?page=provider&id=3" class="profile-btn">View Profile <i></i></a>
-            </div>
-        </article>
+                <article class="provider-card">
+                    <div class="provider-cover">
+                        <img src="../assets/images/providers/<?= htmlspecialchars($coverImage); ?>" alt="<?= htmlspecialchars($provider['full_name']); ?>">
 
-        <article class="provider-card reveal-item">
-            <div class="provider-image">
-                <img src="../assets/images/msagambegu.jpg" alt="Mtaa Auto Garage">
-                <button class="favorite-btn" type="button" aria-label="Add Mtaa Auto Garage to favorites">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <span class="verified-badge"><i class="bi bi-patch-check-fill"></i> Verified</span>
-            </div>
-            <div class="provider-body">
-                <div class="provider-rating">
-                    <span><i class="bi bi-star-fill"></i> 4.7</span>
-                    <span><i class="bi bi-geo-alt"></i> Ubungo</span>
-                </div>
-                <h3>Mtaa Auto Garage</h3>
-                <p>Automotive Specialist</p>
-                <a href="dashboard.php?page=provider&id=4" class="profile-btn">View Profile <i></i></a>
-            </div>
-        </article>
+                        <?php if ((int) $provider['is_verified'] === 1): ?>
+                            <span class="verified-badge">
+                                <i class="fa-solid fa-circle-check"></i>
+                                Verified
+                            </span>
+                        <?php endif; ?>
 
-    </div>
-</section>
+                        <button type="button" class="favorite-provider" aria-label="Add <?= htmlspecialchars($provider['full_name']); ?> to favorites">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
 
-<section class="section nearby-section reveal">
-    <div class="section-header">
-        <div>
-            <span class="section-eyebrow">Around You</span>
-            <h2 class="section-title">Providers Near You</h2>
-            <p class="section-subtitle">Professionals available around your current area.</p>
-        </div>
-        <a href="dashboard.php?page=services" class="section-link">Explore nearby <i class="bi bi-arrow-right"></i></a>
-    </div>
+                    <div class="provider-card-content">
+                        <div class="provider-profile-row">
+                            <img src="../assets/images/providers/<?= htmlspecialchars($profileImage); ?>" alt="<?= htmlspecialchars($provider['full_name']); ?>" class="provider-avatar">
 
-    <div class="nearby-location">
-        <div class="location-icon">
-            <i class="bi bi-geo-alt-fill"></i>
-        </div>
-        <div>
-            <span>Your current area</span>
-            <strong>Dar es Salaam, Tanzania</strong>
-        </div>
-        <button type="button" class="change-location">
-            <i class="bi bi-crosshair"></i> Change
-        </button>
-    </div>
+                            <div>
+                                <h3>
+                                    <?= htmlspecialchars($provider['full_name']); ?>
 
-    <div class="nearby-grid">
+                                    <?php if ((int) $provider['is_verified'] === 1): ?>
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    <?php endif; ?>
+                                </h3>
 
-        <article class="nearby-card reveal-item">
-            <div class="nearby-avatar">
-                <img src="../assets/images/c.jpg" alt="David Electronics">
-                <span class="online-dot"></span>
+                                <p>
+                                    <?= !empty($services)
+                                        ? htmlspecialchars($services[0])
+                                        : 'Service Provider'; ?>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="provider-rating">
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                <?= number_format((float) $provider['average_rating'], 1); ?>
+                            </span>
+
+                            <small>
+                                (<?= (int) $provider['total_reviews']; ?> reviews)
+                            </small>
+                        </div>
+
+                        <div class="provider-details">
+                            <?php if (!empty($provider['location_name'])): ?>
+                                <span>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <?= htmlspecialchars($provider['location_name']); ?>
+                                </span>
+                            <?php endif; ?>
+
+                            <span>
+                                <i class="fa-solid fa-briefcase"></i>
+                                <?= (int) $provider['years_experience']; ?>
+                                <?= (int) $provider['years_experience'] === 1 ? 'year' : 'years'; ?>
+                                experience
+                            </span>
+                        </div>
+
+                        <?php if (!empty($services)): ?>
+                            <div class="provider-tags">
+                                <?php foreach (array_slice($services, 0, 3) as $service): ?>
+                                    <span><?= htmlspecialchars($service); ?></span>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="provider-actions">
+                            <a href="#" class="view-profile-button">
+                                View Profile
+                            </a>
+
+                            <a href="#" class="hire-button">
+                                Hire Now
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="empty-state">
+                <i class="fa-solid fa-users-slash"></i>
+                <h3>No providers available</h3>
+                <p>There are currently no active providers with services.</p>
             </div>
-            <div class="nearby-info">
-                <div class="nearby-title">
-                    <h3>David Electronics</h3>
-                    <span class="nearby-rating"><i class="bi bi-star-fill"></i> 4.8</span>
-                </div>
-                <p>Electrical Specialist</p>
-                <span class="nearby-distance"><i class="bi bi-geo-alt"></i> 1.4 km away</span>
-            </div>
-            <a href="dashboard.php?page=provider&id=5" class="nearby-arrow">
-                <i class="bi bi-arrow-up-right"></i>
-            </a>
-        </article>
-
-        <article class="nearby-card reveal-item">
-            <div class="nearby-avatar">
-                <img src="../assets/images/b.jpg" alt="Grace Cleaning">
-                <span class="online-dot"></span>
-            </div>
-            <div class="nearby-info">
-                <div class="nearby-title">
-                    <h3>Grace Cleaning</h3>
-                    <span class="nearby-rating"><i class="bi bi-star-fill"></i> 4.9</span>
-                </div>
-                <p>Home Cleaning</p>
-                <span class="nearby-distance"><i class="bi bi-geo-alt"></i> 2.1 km away</span>
-            </div>
-            <a href="dashboard.php?page=provider&id=6" class="nearby-arrow">
-                <i class="bi bi-arrow-up-right"></i>
-            </a>
-        </article>
-
-        <article class="nearby-card reveal-item">
-            <div class="nearby-avatar">
-                <img src="../assets/images/a.jpg" alt="Mike Auto Care">
-                <span class="online-dot"></span>
-            </div>
-            <div class="nearby-info">
-                <div class="nearby-title">
-                    <h3>Mike Auto Care</h3>
-                    <span class="nearby-rating"><i class="bi bi-star-fill"></i> 4.7</span>
-                </div>
-                <p>Auto Mechanic</p>
-                <span class="nearby-distance"><i class="bi bi-geo-alt"></i> 2.8 km away</span>
-            </div>
-            <a href="dashboard.php?page=provider&id=7" class="nearby-arrow">
-                <i class="bi bi-arrow-up-right"></i>
-            </a>
-        </article>
-
+        <?php endif; ?>
     </div>
 </section>

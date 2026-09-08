@@ -8,16 +8,25 @@ declare(strict_types=1);
 |--------------------------------------------------------------------------
 */
 
-$providerId = (int)($_SESSION['user_id'] ?? 0);
+$providerId =
+    (int)($_SESSION['user_id'] ?? 0);
 
-$providerName = $_SESSION['full_name'] ?? 'Provider';
 
-$providerProfileImage = null;
+$providerName =
+    $_SESSION['full_name'] ?? 'Provider';
+
+
+$providerProfileImage =
+    null;
+
+
+$providerAvailability =
+    'available';
 
 
 /*
 |--------------------------------------------------------------------------
-| Load Provider Profile Image
+| Load Provider Profile
 |--------------------------------------------------------------------------
 */
 
@@ -32,41 +41,47 @@ if ($providerId > 0) {
         LIMIT 1
     ");
 
+
     $profileStmt->execute([
         $providerId
     ]);
 
-    $providerProfile = $profileStmt->fetch(PDO::FETCH_ASSOC);
+
+    $providerProfile =
+        $profileStmt->fetch(
+            PDO::FETCH_ASSOC
+        );
+
 
     if ($providerProfile) {
 
         $providerProfileImage =
-            $providerProfile['profile_image'] ?? null;
+            $providerProfile['profile_image']
+            ?? null;
+
 
         $providerAvailability =
-            $providerProfile['availability'] ?? 'available';
-
-    } else {
-
-        $providerAvailability = 'available';
+            $providerProfile['availability']
+            ?? 'available';
 
     }
-
-} else {
-
-    $providerAvailability = 'available';
 
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| Profile Image
+| Profile Image Path
 |--------------------------------------------------------------------------
+|
+| IMPORTANT:
+| Use absolute browser path because topbar.php
+| is included through provider/dashboard.php
+|
 */
 
-$defaultProfileImage =
-    '../assets/images/default.jpg';
+$profileImage =
+    '/services-finder/assets/images/providers/default.jpg';
 
 
 if (
@@ -75,14 +90,15 @@ if (
 ) {
 
     $profileImage =
-        '../assets/images/providers/' .
-        basename($providerProfileImage);
-
-} else {
-
-    $profileImage = $defaultProfileImage;
+        '/services-finder/assets/images/providers/' .
+        rawurlencode(
+            basename(
+                $providerProfileImage
+            )
+        );
 
 }
+
 ?>
 
 <header class="provider-topbar">
@@ -90,9 +106,14 @@ if (
     <div class="provider-topbar-inner">
 
 
-        <!-- LEFT -->
+        <!-- =====================================================
+             LEFT
+        ====================================================== -->
 
         <div class="provider-topbar-left">
+
+
+            <!-- MENU BUTTON -->
 
             <button
                 type="button"
@@ -107,6 +128,8 @@ if (
             </button>
 
 
+            <!-- SEARCH -->
+
             <div class="provider-search">
 
                 <i class="fa-solid fa-magnifying-glass provider-search-icon"></i>
@@ -118,11 +141,14 @@ if (
 
             </div>
 
+
         </div>
 
 
 
-        <!-- RIGHT -->
+        <!-- =====================================================
+             RIGHT
+        ====================================================== -->
 
         <div class="provider-topbar-actions">
 
@@ -134,9 +160,11 @@ if (
                 <span class="availability-indicator"></span>
 
                 <span>
+
                     <?= htmlspecialchars(
                         ucfirst($providerAvailability)
                     ) ?>
+
                 </span>
 
             </div>
@@ -153,7 +181,9 @@ if (
                 <i class="fa-regular fa-bell"></i>
 
                 <span class="notification-badge">
+
                     0
+
                 </span>
 
             </button>
@@ -166,23 +196,51 @@ if (
                 href="dashboard.php?page=profile"
                 class="provider-user">
 
+
+                <!-- PROFILE IMAGE -->
+
                 <div class="provider-user-avatar">
 
-                    <img
-                        src="<?= htmlspecialchars($profileImage) ?>"
-                        alt="<?= htmlspecialchars($providerName) ?>">
+                    <?php if (
+                        !empty($providerProfileImage) &&
+                        $providerProfileImage !== 'default.jpg'
+                    ): ?>
+
+                        <img
+                            src="<?= htmlspecialchars($profileImage) ?>"
+                            alt="<?= htmlspecialchars($providerName) ?>">
+
+                    <?php else: ?>
+
+                        <div class="provider-user-avatar-placeholder">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+                    <?php endif; ?>
 
                 </div>
 
 
+
+                <!-- USER INFORMATION -->
+
                 <div class="provider-user-info">
 
                     <strong>
-                        <?= htmlspecialchars($providerName) ?>
+
+                        <?= htmlspecialchars(
+                            $providerName
+                        ) ?>
+
                     </strong>
 
+
                     <span>
+
                         Provider
+
                     </span>
 
                 </div>
@@ -190,10 +248,12 @@ if (
 
                 <i class="fa-solid fa-chevron-down"></i>
 
+
             </a>
 
 
         </div>
+
 
     </div>
 

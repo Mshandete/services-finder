@@ -368,13 +368,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             AND role = 'provider'
         ");
 
-        $userStmt->execute([
-            $fullName,
-            $email,
-            $phone,
-            $providerId
-        ]);
+$userStmt->execute([
+    $fullName,
+    $email,
+    $phone,
+    $providerId
+]);
 
+
+$_SESSION['full_name'] =
+    $fullName;s
 
         /*
         |--------------------------------------------------------------------------
@@ -722,27 +725,45 @@ $coverImage = $provider['cover_image'] ?? 'default-cover.jpg';
 |--------------------------------------------------------------------------
 */
 
-$profileImagePath = '../assets/images/providers/default.jpg';
+$profileImagePath =
+    '/services-finder/assets/images/providers/default.jpg';
+
 
 if (
     !empty($profileImage) &&
     $profileImage !== 'default.jpg'
 ) {
+
     $profileImagePath =
-        '../assets/images/providers/' .
-        basename($profileImage);
+        '/services-finder/assets/images/providers/' .
+        rawurlencode(
+            basename($profileImage)
+        );
+
 }
 
 
-$coverImagePath = '../assets/images/providers/default-cover.jpg';
+/*
+|--------------------------------------------------------------------------
+| Cover Image Path
+|--------------------------------------------------------------------------
+*/
+
+$coverImagePath =
+    '/services-finder/assets/images/providers/default-cover.jpg';
+
 
 if (
     !empty($coverImage) &&
     $coverImage !== 'default-cover.jpg'
 ) {
+
     $coverImagePath =
-        '../assets/images/providers/' .
-        basename($coverImage);
+        '/services-finder/assets/images/providers/' .
+        rawurlencode(
+            basename($coverImage)
+        );
+
 }
 
 
@@ -869,7 +890,9 @@ $availabilityLabel =
 
         <?php else: ?>
 
-            <div class="profile-avatar-placeholder">
+            <div
+                class="profile-avatar-placeholder"
+                id="profileImagePlaceholder">
 
                 <i class="fa-solid fa-user"></i>
 
@@ -880,13 +903,13 @@ $availabilityLabel =
     </div>
 
 
-    <!-- CHANGE PROFILE PHOTO -->
+    <!-- CHANGE PHOTO BUTTON -->
 
     <button
         type="button"
         class="change-profile-photo-btn"
         id="changeProfilePhotoBtn"
-        title="Change profile photo">
+        aria-label="Change profile photo">
 
         <i class="fa-solid fa-camera"></i>
 
@@ -904,7 +927,6 @@ $availabilityLabel =
     <?php endif; ?>
 
 </div>
-
 
             <!-- PROVIDER INFORMATION -->
 
