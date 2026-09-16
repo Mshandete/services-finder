@@ -250,13 +250,9 @@ $dashboardLocationText =
                     ) ?>">
 
             <?php else: ?>
-
                 <div class="provider-avatar-placeholder">
-
                     <i class="fa-solid fa-user"></i>
-
                 </div>
-
             <?php endif; ?>
 
         </div>
@@ -336,85 +332,45 @@ $dashboardLocationText =
             <!-- RATING -->
 
             <p class="provider-rating">
-
                 <i class="fa-solid fa-star"></i>
-
                 <?= number_format(
                     $dashboardRating,
                     1
                 ) ?>
-
                 <span>
-
                     (
                     <?= number_format(
                         $dashboardReviews
                     ) ?>
                     reviews)
-
                 </span>
-
             </p>
-
-
         </div>
-
     </div>
 
-
     <!-- PROFILE PROGRESS -->
-
     <div class="profile-progress">
-
-
         <div class="progress-info">
-
             <div>
-
-                <span>
-                    Profile Status
-                </span>
-
+                <span>Profile Status</span>
                 <strong>
-
                     <?= $dashboardCompletionPercentage ?>%
                     Completed
-
                 </strong>
-
             </div>
-
         </div>
-
 
         <div class="progress-bar">
-
-            <div
-                class="progress-fill"
-                style="
-                    width:
-                    <?= $dashboardCompletionPercentage ?>%;
-                ">
-
+            <div class="progress-fill" style=" width: <?= $dashboardCompletionPercentage ?>%;">
             </div>
-
         </div>
-
-
     </div>
 
 
     <!-- EDIT PROFILE -->
-
-    <a
-        href="dashboard.php?page=profile"
-        class="edit-profile-btn">
-
+    <a href="dashboard.php?page=profile" class="edit-profile-btn">
         <i class="fa-solid fa-pen"></i>
-
         Edit Profile
-
     </a>
-
 
 </section>

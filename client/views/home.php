@@ -1,197 +1,402 @@
-<section class="client-hero">
-    <div class="hero-content">
-        <div class="hero-label">
-            <i class="fa-solid fa-location-crosshairs"></i>
-            <span>Find trusted professionals near you</span>
+<?php
+
+declare(strict_types=1);
+require_once __DIR__ . '/../../includes/auth.php';
+requireRole('client');
+
+require_once __DIR__ . '/../../config/database.php';
+
+/*
+|--------------------------------------------------------------------------
+| Load Active Services
+|--------------------------------------------------------------------------
+*/
+
+$services = [];
+
+try {
+
+    $serviceQuery = $pdo->query("
+        SELECT
+            ps.id,
+            ps.provider_user_id,
+            ps.service_name,
+            ps.description,
+            ps.price,
+            ps.price_type,
+            ps.service_image,
+            ps.estimated_duration,
+
+            u.full_name,
+            pp.location_name,
+            pp.latitude,
+            pp.longitude,
+            pp.average_rating,
+            pp.total_reviews,
+            pp.years_experience,
+            pp.availability,
+            pp.is_verified
+
+        FROM provider_services ps
+
+        INNER JOIN users u
+            ON u.id = ps.provider_user_id
+
+        INNER JOIN provider_profiles pp
+            ON pp.user_id = ps.provider_user_id
+
+        WHERE
+            ps.status = 'active'
+            AND u.role = 'provider'
+            AND u.account_status = 'active'
+
+        ORDER BY
+            pp.is_verified DESC,
+            pp.average_rating DESC,
+            pp.total_reviews DESC,
+            ps.created_at DESC
+
+        LIMIT 12
+    ");
+
+    $services = $serviceQuery->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+
+    $services = [];
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| Helper Functions
+|--------------------------------------------------------------------------
+*/
+
+function clientHomeImage(string|null $image, string $default): string
+{
+    if (
+        !empty($image) &&
+        filter_var($image, FILTER_VALIDATE_URL)
+    ) {
+        return $image;
+    }
+
+    if (!empty($image)) {
+
+        $image = ltrim($image, '/');
+
+        /*
+         * Images stored inside assets/images/...
+         */
+        if (str_starts_with($image, 'assets/')) {
+            return '../' . $image;
+        }
+
+        /*
+         * Images stored as filename only.
+         */
+        return '../assets/images/' . $image;
+    }
+
+    return $default;
+}
+
+function formatServicePrice(
+    mixed $price,
+    string|null $priceType
+): string {
+
+    if ($priceType === 'negotiable') {
+        return 'Negotiable';
+    }
+
+    if ($price === null || $price === '') {
+        return 'Price on request';
+    }
+
+    return 'TZS ' . number_format(
+        (float) $price,
+        0
+    );
+}
+
+function serviceRating(mixed $rating): string
+{
+    if ($rating === null || $rating === '') {
+        return 'New';
+    }
+
+    return number_format(
+        (float) $rating,
+        1
+    );
+}
+
+?>
+
+<!-- =========================================================
+     CLIENT HOME
+========================================================= -->
+
+<section class="client-home">
+
+    <section class="client-hero">
+
+        <div class="hero-content">
+
+            <span class="hero-eyebrow">
+                <i class="fa-solid fa-location-dot"></i>
+                Find trusted local professionals
+            </span>
+            <h1> Find the right service<span>near you.</span></h1>
+            <p>
+                Discover trusted providers, compare services,
+                and hire the right professional for your needs.
+            </p>
+
+            <form class="hero-search" action="dashboard.php" method="GET">
+                <input type="hidden" name="page" value="services">
+
+                <div class="search-input-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="q" placeholder="What service are you looking for?" autocomplete="off">
+                </div>
+
+                <button type="submit" class="hero-search-btn"> Search</button>
+            </form>
         </div>
 
-        <div class="hero-text">
-            <h1>Find the right professional for every job.</h1>
-            <p>Discover trusted service providers, compare their profiles and connect with the right professional for your needs.</p>
+        <div class="hero-image">
+            <img src="../assets/images/client-hero.jpg" alt="FindPro services">
         </div>
+    </section>
 
-        <form class="hero-search" action="dashboard.php" method="GET">
-            <input type="hidden" name="page" value="services">
 
-            <div class="hero-search-input">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search" name="search" placeholder="What service are you looking for?" autocomplete="off">
+    <!-- =====================================================
+         EXPLORE SERVICES
+    ====================================================== -->
+
+    <section class="dashboard-section services-section">
+        <div class="section-header">
+            <div>
+                <span class="section-eyebrow"> DISCOVER </span>
+                <h2>Explore Services</h2>
+                <p>Find services from trusted providers near you.</p>
             </div>
 
-            <button type="submit" class="hero-search-button">
-                Search
-            </button>
-        </form>
-    </div>
+            <a href="dashboard.php?page=services" class="section-link">
+                View all
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
 
-    <div class="hero-image">
-        <img src="../assets/images/client-hero.jpg" alt="Find professional services">
-    </div>
-</section>
-
-<section class="dashboard-section services-section">
-    <div class="section-header">
-        <div>
-            <h2>Popular Services</h2>
-            <p>Explore services available from trusted professionals.</p>
         </div>
 
-        <a href="dashboard.php?page=services" class="section-link">
-            View all
-            <i class="fa-solid fa-arrow-right"></i>
-        </a>
-    </div>
 
-    <div class="services-grid">
-        <?php if (!empty($categories)): ?>
-            <?php foreach ($categories as $category): ?>
-                <a href="dashboard.php?page=services&category=<?= (int) $category['id']; ?>" class="service-card">
-                    <div class="service-icon">
-                        <?php if (!empty($category['category_icon'])): ?>
-                            <i class="<?= htmlspecialchars($category['category_icon']); ?>"></i>
-                        <?php else: ?>
-                            <i class="fa-solid fa-layer-group"></i>
-                        <?php endif; ?>
-                    </div>
+        <?php if (!empty($services)): ?>
 
-                    <div class="service-card-info">
-                        <span><?= htmlspecialchars($category['category_name']); ?></span>
-                        <small>
-                            <?= (int) $category['provider_count']; ?>
-                            <?= (int) $category['provider_count'] === 1 ? 'provider' : 'providers'; ?>
-                        </small>
-                    </div>
-                </a>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <div class="empty-state">
-                <i class="fa-solid fa-layer-group"></i>
-                <p>No services available yet.</p>
-            </div>
-        <?php endif; ?>
-    </div>
-</section>
+            <div class="services-grid">
 
-<section class="dashboard-section providers-section">
-    <div class="section-header">
-        <div>
-            <h2>Recommended Providers</h2>
-            <p>Professionals selected based on availability, trust and experience.</p>
-        </div>
+                <?php foreach ($services as $service): ?>
 
-        <a href="dashboard.php?page=services" class="section-link">
-            View all
-            <i class="fa-solid fa-arrow-right"></i>
-        </a>
-    </div>
+                    <?php
 
-    <div class="providers-grid">
-        <?php if (!empty($recommendedProviders)): ?>
-            <?php foreach ($recommendedProviders as $provider): ?>
-                <?php
-                $profileImage = !empty($provider['profile_image'])
-                    ? $provider['profile_image']
-                    : 'default.jpg';
+                    $serviceName = trim(
+                        (string) ($service['service_name'] ?? '')
+                    );
 
-                $coverImage = !empty($provider['cover_image'])
-                    ? $provider['cover_image']
-                    : 'default-cover.jpg';
+                    $providerName = trim(
+                        (string) ($service['full_name'] ?? 'Provider')
+                    );
 
-                $services = !empty($provider['services'])
-                    ? explode(', ', $provider['services'])
-                    : [];
-                ?>
+                    $location = trim(
+                        (string) ($service['location_name'] ?? '')
+                    );
 
-                <article class="provider-card">
-                    <div class="provider-cover">
-                        <img src="../assets/images/providers/<?= htmlspecialchars($coverImage); ?>" alt="<?= htmlspecialchars($provider['full_name']); ?>">
+                    $rating = serviceRating(
+                        $service['average_rating'] ?? null
+                    );
 
-                        <?php if ((int) $provider['is_verified'] === 1): ?>
-                            <span class="verified-badge">
-                                <i class="fa-solid fa-circle-check"></i>
-                                Verified
-                            </span>
-                        <?php endif; ?>
+                    $price = formatServicePrice(
+                        $service['price'] ?? null,
+                        $service['price_type'] ?? null
+                    );
 
-                        <button type="button" class="favorite-provider" aria-label="Add <?= htmlspecialchars($provider['full_name']); ?> to favorites">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
-                    </div>
+$serviceImageName = trim(
+    (string) ($service['service_image'] ?? '')
+);
 
-                    <div class="provider-card-content">
-                        <div class="provider-profile-row">
-                            <img src="../assets/images/providers/<?= htmlspecialchars($profileImage); ?>" alt="<?= htmlspecialchars($provider['full_name']); ?>" class="provider-avatar">
+if ($serviceImageName !== '') {
+    $serviceImage = '../assets/images/services/' . basename($serviceImageName);
+} else {
+    $serviceImage = '../assets/images/service-placeholder.jpg';
+}
 
-                            <div>
-                                <h3>
-                                    <?= htmlspecialchars($provider['full_name']); ?>
+                    ?>
 
-                                    <?php if ((int) $provider['is_verified'] === 1): ?>
-                                        <i class="fa-solid fa-circle-check"></i>
-                                    <?php endif; ?>
-                                </h3>
+                    <!-- =====================================
+                         SERVICE CARD
+                    ====================================== -->
 
-                                <p>
-                                    <?= !empty($services)
-                                        ? htmlspecialchars($services[0])
-                                        : 'Service Provider'; ?>
-                                </p>
-                            </div>
-                        </div>
+                    <article
+                        class="service-card service-card-large"
+                        data-service-id="<?= (int) $service['id']; ?>"
+                    >
 
-                        <div class="provider-rating">
-                            <span>
-                                <i class="fa-solid fa-star"></i>
-                                <?= number_format((float) $provider['average_rating'], 1); ?>
-                            </span>
+                        <!-- Service Image -->
 
-                            <small>
-                                (<?= (int) $provider['total_reviews']; ?> reviews)
-                            </small>
-                        </div>
+                        <div class="service-card-image">
 
-                        <div class="provider-details">
-                            <?php if (!empty($provider['location_name'])): ?>
-                                <span>
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <?= htmlspecialchars($provider['location_name']); ?>
+                            <img
+                                src="<?= htmlspecialchars($serviceImage); ?>"
+                                alt="<?= htmlspecialchars($serviceName); ?>"
+                                loading="lazy"
+                                onerror="this.src='../assets/images/service-placeholder.jpg';"
+                            >
+
+                            <?php if (
+                                !empty($service['is_verified']) &&
+                                (int) $service['is_verified'] === 1
+                            ): ?>
+
+                                <span class="service-verified">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    Verified
                                 </span>
+
                             <?php endif; ?>
 
-                            <span>
-                                <i class="fa-solid fa-briefcase"></i>
-                                <?= (int) $provider['years_experience']; ?>
-                                <?= (int) $provider['years_experience'] === 1 ? 'year' : 'years'; ?>
-                                experience
-                            </span>
                         </div>
 
-                        <?php if (!empty($services)): ?>
-                            <div class="provider-tags">
-                                <?php foreach (array_slice($services, 0, 3) as $service): ?>
-                                    <span><?= htmlspecialchars($service); ?></span>
-                                <?php endforeach; ?>
+
+                        <!-- Service Content -->
+
+                        <div class="service-card-body">
+
+                            <div class="service-card-top">
+
+                                <h3>
+                                    <?= htmlspecialchars($serviceName); ?>
+                                </h3>
+
+                                <span class="service-price">
+                                    <?= htmlspecialchars($price); ?>
+                                </span>
+
                             </div>
-                        <?php endif; ?>
 
-                        <div class="provider-actions">
-                            <a href="#" class="view-profile-button">
-                                View Profile
-                            </a>
+                            <!-- Location -->
 
-                            <a href="#" class="hire-button">
-                                Hire Now
-                            </a>
+                            <?php if ($location !== ''): ?>
+                                <div class="service-location">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <span>
+                                        <?= htmlspecialchars($location); ?>
+                                    </span>
+                                </div>
+                            <?php endif; ?>
+
+
+                            <!-- Duration -->
+
+                            <?php if (
+                                !empty($service['estimated_duration'])
+                            ): ?>
+
+                                <div class="service-duration">
+                                    <i class="fa-regular fa-clock"></i>
+                                    <span>
+                                        <?= htmlspecialchars(
+                                            (string) $service['estimated_duration']
+                                        ); ?>
+                                    </span>
+                                </div>
+                            <?php endif; ?>
+
+                            <!-- Description -->
+                            <?php if (
+                                !empty($service['description'])
+                            ): ?>
+                                <p class="service-description">
+                                    <?= htmlspecialchars(
+                                        (string) $service['description']
+                                    ); ?>
+                                </p>
+                            <?php endif; ?>
+
+
+                            <!-- Actions -->
+                            <div class="service-card-actions">
+                                <a href="#" class="service-view-btn" data-provider-id="<?= (int) $service['provider_user_id']; ?>">
+                                    View Profile
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+
+                                <a href="#" class="service-hire-btn" data-service-id="<?= (int) $service['id']; ?>"
+                                    data-provider-id="<?= (int) $service['provider_user_id']; ?>">
+                                    <i class="fa-solid fa-briefcase"></i>
+                                    Hire
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </article>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <div class="empty-state">
-                <i class="fa-solid fa-users-slash"></i>
-                <h3>No providers available</h3>
-                <p>There are currently no active providers with services.</p>
+
+                    </article>
+
+                <?php endforeach; ?>
+
             </div>
+
+        <?php else: ?>
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================== -->
+
+            <div class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+
+                <h3> No services available yet</h3>
+                <p>New services from local providers will appear here.</p>
+                <a href="dashboard.php?page=services" class="empty-state-btn">
+                    Explore Services
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
         <?php endif; ?>
-    </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         QUICK DISCOVERY
+    ====================================================== -->
+
+    <section class="dashboard-section home-discovery-section">
+        <div class="discovery-content">
+            <div class="discovery-icon">
+                <i class="fa-solid fa-compass"></i>
+            </div>
+
+            <div>
+                <h2>Looking for something specific?</h2>
+                <p>
+                    Search through all available services and
+                    find the professional that matches your needs.
+                </p>
+
+            </div>
+
+            <a href="dashboard.php?page=services" class="discovery-btn">
+                Find a Service
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </section>
+
 </section>

@@ -377,7 +377,7 @@ $userStmt->execute([
 
 
 $_SESSION['full_name'] =
-    $fullName;s
+    $fullName;
 
         /*
         |--------------------------------------------------------------------------
@@ -742,7 +742,6 @@ if (
 
 }
 
-
 /*
 |--------------------------------------------------------------------------
 | Cover Image Path
@@ -763,9 +762,7 @@ if (
         rawurlencode(
             basename($coverImage)
         );
-
 }
-
 
 /*
 |--------------------------------------------------------------------------
@@ -831,17 +828,10 @@ $availabilityLabel =
             <?= htmlspecialchars($profileMessage) ?>
         </span>
 
-        <button
-            type="button"
-            class="profile-alert-close"
-            id="closeProfileAlert">
-
+        <button type="button" class="profile-alert-close" id="closeProfileAlert">
             <i class="fa-solid fa-xmark"></i>
-
         </button>
-
     </div>
-
 <?php endif; ?>
 
     <!-- =========================================================
@@ -849,36 +839,27 @@ $availabilityLabel =
     ========================================================== -->
 
     <section class="profile-hero">
-
         <div class="profile-cover">
-
             <?php if (
                 !empty($coverImage) &&
                 $coverImage !== 'default-cover.jpg'
             ): ?>
 
-                <img
-                    src="<?= htmlspecialchars($coverImagePath) ?>"
+                <img src="<?= htmlspecialchars($coverImagePath) ?>"
                     alt="Profile Cover">
 
             <?php else: ?>
-
                 <div class="default-profile-cover"></div>
-
             <?php endif; ?>
-
         </div>
 
 
         <div class="profile-header-content">
 
-
             <!-- PROFILE IMAGE -->
 
 <div class="profile-avatar-wrapper">
-
     <div class="profile-avatar">
-
         <?php if (
             !empty($profileImage) &&
             $profileImage !== 'default.jpg'
@@ -887,731 +868,378 @@ $availabilityLabel =
             <img
                 src="<?= htmlspecialchars($profileImagePath) ?>"
                 alt="<?= htmlspecialchars($fullName) ?>">
-
         <?php else: ?>
 
-            <div
-                class="profile-avatar-placeholder"
-                id="profileImagePlaceholder">
-
+            <div class="profile-avatar-placeholder" id="profileImagePlaceholder">
                 <i class="fa-solid fa-user"></i>
-
             </div>
-
         <?php endif; ?>
-
     </div>
 
 
     <!-- CHANGE PHOTO BUTTON -->
-
     <button
         type="button"
         class="change-profile-photo-btn"
         id="changeProfilePhotoBtn"
         aria-label="Change profile photo">
-
         <i class="fa-solid fa-camera"></i>
-
     </button>
 
-
     <?php if ($isVerified === 1): ?>
-
         <span class="verified-badge">
-
             <i class="fa-solid fa-circle-check"></i>
-
         </span>
-
     <?php endif; ?>
-
 </div>
 
             <!-- PROVIDER INFORMATION -->
-
             <div class="profile-main-info">
-
                 <div class="profile-name-row">
-
                     <h1>
                         <?= htmlspecialchars($fullName) ?>
                     </h1>
-
-
                     <?php if ($isVerified === 1): ?>
-
                         <span class="profile-verified">
-
                             <i class="fa-solid fa-circle-check"></i>
-
                             Verified
-
                         </span>
-
                     <?php endif; ?>
-
                 </div>
-
 
                 <p class="profile-role">
-
                     <i class="fa-solid fa-briefcase"></i>
-
                     Service Provider
-
                 </p>
 
-
                 <div class="profile-location">
-
                     <i class="fa-solid fa-location-dot"></i>
-
                     <?php if (!empty($locationName)): ?>
-
                         <?= htmlspecialchars($locationName) ?>
-
                     <?php else: ?>
-
                         Location not added
-
                     <?php endif; ?>
-
                 </div>
-
-
             </div>
-
-
 
             <!-- PROFILE ACTIONS -->
-
             <div class="profile-header-actions">
-
                 <span class="profile-availability availability-<?= htmlspecialchars($availability) ?>">
-
                     <span class="availability-dot"></span>
-
                     <?= htmlspecialchars($availabilityLabel) ?>
-
                 </span>
 
-
-                <button
-                    type="button"
-                    class="edit-profile-btn"
-                    id="openEditProfile">
-
+                <button type="button" class="edit-profile-btn" id="openEditProfile">
                     <i class="fa-solid fa-pen"></i>
-
                     Edit Profile
-
                 </button>
-
             </div>
-
-
         </div>
-
     </section>
-
-
 
     <!-- =========================================================
          PROFILE CONTENT
     ========================================================== -->
-
     <div class="profile-layout">
-
-
         <!-- =====================================================
              LEFT COLUMN
         ====================================================== -->
-
         <div class="profile-main-column">
-
-
             <!-- ABOUT -->
-
             <section class="profile-card">
-
                 <div class="profile-card-header">
-
                     <div>
-
                         <h2>
-
                             <i class="fa-regular fa-user"></i>
-
                             About Me
-
                         </h2>
-
-                        <p>
-                            Information about your professional background.
-                        </p>
-
+                        <p>Information about your professional background.</p>
                     </div>
-
                 </div>
 
-
                 <div class="profile-card-body">
-
                     <?php if (!empty($bio)): ?>
-
                         <p class="profile-bio">
-
                             <?= nl2br(
                                 htmlspecialchars($bio)
                             ) ?>
-
                         </p>
 
                     <?php else: ?>
-
                         <div class="profile-empty-state">
-
                             <i class="fa-regular fa-clipboard"></i>
-
                             <p>
                                 Tell clients about yourself,
                                 your skills and your experience.
                             </p>
-
-                            <button
-                                type="button"
-                                class="profile-text-button open-edit-profile">
-
+                            <button type="button" class="profile-text-button open-edit-profile">
                                 Add Bio
-
                             </button>
-
                         </div>
-
                     <?php endif; ?>
-
                 </div>
-
             </section>
 
-
-
             <!-- PERSONAL INFORMATION -->
-
             <section class="profile-card">
-
                 <div class="profile-card-header">
-
                     <div>
-
                         <h2>
-
                             <i class="fa-regular fa-address-card"></i>
-
                             Personal Information
-
                         </h2>
-
-                        <p>
-                            Your basic account information.
-                        </p>
-
+                        <p>Your basic account information.</p>
                     </div>
-
                 </div>
 
-
                 <div class="profile-card-body">
-
                     <div class="profile-info-grid">
-
-
                         <div class="profile-info-item">
-
                             <div class="profile-info-icon">
-
                                 <i class="fa-regular fa-user"></i>
-
                             </div>
 
-
                             <div>
-
-                                <span>
-                                    Full Name
-                                </span>
-
+                                <span>Full Name</span>
                                 <strong>
                                     <?= htmlspecialchars($fullName) ?>
                                 </strong>
-
                             </div>
-
                         </div>
 
-
-
                         <div class="profile-info-item">
-
                             <div class="profile-info-icon">
-
                                 <i class="fa-regular fa-envelope"></i>
-
                             </div>
 
-
                             <div>
-
-                                <span>
-                                    Email Address
-                                </span>
-
+                                <span>Email Address</span>
                                 <strong>
                                     <?= htmlspecialchars($email) ?>
                                 </strong>
-
                             </div>
-
                         </div>
 
-
-
                         <div class="profile-info-item">
-
                             <div class="profile-info-icon">
-
                                 <i class="fa-solid fa-phone"></i>
-
                             </div>
 
-
                             <div>
-
-                                <span>
-                                    Phone Number
-                                </span>
-
+                                <span>Phone Number</span>
                                 <strong>
                                     <?= htmlspecialchars($phone) ?>
                                 </strong>
-
                             </div>
-
                         </div>
 
-
-
                         <div class="profile-info-item">
-
                             <div class="profile-info-icon">
-
                                 <i class="fa-solid fa-location-dot"></i>
-
                             </div>
 
-
                             <div>
-
-                                <span>
-                                    Location
-                                </span>
-
+                                <span>Location</span>
                                 <strong>
-
                                     <?= !empty($locationName)
                                         ? htmlspecialchars($locationName)
                                         : 'Not added'
                                     ?>
-
                                 </strong>
-
                             </div>
-
                         </div>
-
-
                     </div>
-
                 </div>
-
             </section>
 
-
-
             <!-- PROFESSIONAL INFORMATION -->
-
             <section class="profile-card">
-
                 <div class="profile-card-header">
-
                     <div>
-
                         <h2>
-
                             <i class="fa-solid fa-briefcase"></i>
-
                             Professional Information
-
                         </h2>
-
-                        <p>
-                            Information clients can use to know you better.
-                        </p>
-
+                        <p>Information clients can use to know you better.</p>
                     </div>
-
                 </div>
 
-
                 <div class="profile-card-body">
-
                     <div class="profile-info-grid">
-
-
                         <div class="profile-info-item">
-
                             <div class="profile-info-icon">
-
                                 <i class="fa-solid fa-award"></i>
-
                             </div>
 
-
                             <div>
-
-                                <span>
-                                    Experience
-                                </span>
-
+                                <span>Experience</span>
                                 <strong>
-
                                     <?= $yearsExperience > 0
                                         ? $yearsExperience . ' Years'
                                         : 'Not added'
                                     ?>
-
                                 </strong>
-
                             </div>
-
                         </div>
 
-
-
                         <div class="profile-info-item">
-
                             <div class="profile-info-icon">
-
                                 <i class="fa-solid fa-star"></i>
-
                             </div>
 
-
                             <div>
-
-                                <span>
-                                    Rating
-                                </span>
-
+                                <span>Rating</span>
                                 <strong>
-
                                     <?= number_format(
                                         $averageRating,
                                         1
                                     ) ?>
-
                                     / 5
-
                                 </strong>
-
                             </div>
-
                         </div>
 
-
-
                         <div class="profile-info-item">
-
                             <div class="profile-info-icon">
-
                                 <i class="fa-regular fa-comment"></i>
-
                             </div>
 
-
                             <div>
-
-                                <span>
-                                    Reviews
-                                </span>
-
+                                <span>Reviews</span>
                                 <strong>
-
                                     <?= number_format(
                                         $totalReviews
                                     ) ?>
-
                                 </strong>
-
                             </div>
-
                         </div>
 
-
-
                         <div class="profile-info-item">
-
                             <div class="profile-info-icon">
-
                                 <i class="fa-solid fa-circle-check"></i>
-
                             </div>
 
-
                             <div>
-
-                                <span>
-                                    Verification
-                                </span>
-
+                                <span>Verification</span>
                                 <strong>
-
                                     <?= $isVerified === 1
                                         ? 'Verified'
                                         : 'Pending Verification'
                                     ?>
-
                                 </strong>
-
                             </div>
-
                         </div>
-
-
                     </div>
-
                 </div>
-
             </section>
-
-
         </div>
-
-
 
         <!-- =====================================================
              RIGHT COLUMN
         ====================================================== -->
-
         <aside class="profile-side-column">
-
-
             <!-- PROFILE COMPLETION -->
-
             <section class="profile-card profile-completion-card">
-
                 <div class="profile-card-header">
-
                     <div>
-
-                        <h2>
-                            Complete Your Profile
-                        </h2>
-
-                        <p>
-                            Complete your profile to help clients trust you.
-                        </p>
-
+                        <h2>Complete Your Profile</h2>
+                        <p>Complete your profile to help clients trust you.</p>
                     </div>
-
                 </div>
 
-
                 <div class="profile-card-body">
-
-
                     <div class="profile-progress-header">
-
                         <strong>
                             <?= $completionPercentage ?>% Complete
                         </strong>
 
                         <span>
-
                             <?= $completedItems ?>
-
                             /
-
                             <?= $totalItems ?>
-
                         </span>
-
                     </div>
-
 
                     <div class="profile-progress-bar">
-
-                        <div
-                            class="profile-progress-fill"
+                        <div class="profile-progress-fill"
                             style="width: <?= $completionPercentage ?>%">
                         </div>
-
                     </div>
-
 
                     <ul class="profile-completion-list">
-
-
                         <li class="<?= !empty($bio) ? 'completed' : '' ?>">
-
                             <i class="fa-solid fa-check"></i>
-
                             Add your bio
-
                         </li>
-
 
                         <li class="<?= !empty($locationName) ? 'completed' : '' ?>">
-
                             <i class="fa-solid fa-check"></i>
-
                             Add your location
-
                         </li>
-
 
                         <li class="<?= $yearsExperience > 0 ? 'completed' : '' ?>">
-
                             <i class="fa-solid fa-check"></i>
-
                             Add experience
-
                         </li>
-
 
                         <li class="<?= $profileImage !== 'default.jpg' ? 'completed' : '' ?>">
-
                             <i class="fa-solid fa-check"></i>
-
                             Add profile photo
-
                         </li>
-
-
                     </ul>
-
-
-                    <button
-                        type="button"
-                        class="complete-profile-btn open-edit-profile">
-
+                    <button type="button" class="complete-profile-btn open-edit-profile">
                         Complete Profile
-
                     </button>
-
-
                 </div>
-
             </section>
 
-
-
             <!-- PROFILE STATUS -->
-
             <section class="profile-card profile-status-card">
-
                 <div class="profile-card-header">
-
                     <div>
-
-                        <h2>
-                            Profile Status
-                        </h2>
-
+                        <h2>Profile Status</h2>
                     </div>
-
                 </div>
 
-
                 <div class="profile-card-body">
-
-
                     <div class="profile-status-row">
-
-                        <span>
-                            Availability
-                        </span>
-
+                        <span>Availability</span>
                         <strong class="status-text-<?= htmlspecialchars($availability) ?>">
-
                             <?= htmlspecialchars($availabilityLabel) ?>
-
                         </strong>
-
                     </div>
 
-
                     <div class="profile-status-row">
-
-                        <span>
-                            Verification
-                        </span>
-
+                        <span>Verification</span>
                         <strong>
-
                             <?= $isVerified === 1
                                 ? 'Verified'
                                 : 'Pending'
                             ?>
-
                         </strong>
-
                     </div>
 
-
                     <div class="profile-status-row">
-
-                        <span>
-                            Profile
-                        </span>
-
+                        <span> Profile</span>
                         <strong>
-
                             <?= $completionPercentage === 100
                                 ? 'Complete'
                                 : 'Incomplete'
                             ?>
-
                         </strong>
-
                     </div>
-
-
                 </div>
 
             </section>
-
-
         </aside>
-
-
     </div>
-
-
 </div>
 
 <!-- =========================================================
      EDIT PROFILE MODAL
 ========================================================== -->
-
-<div
-    class="profile-modal"
-    id="editProfileModal"
-    aria-hidden="true">
-
+<div class="profile-modal" id="editProfileModal" aria-hidden="true">
     <div class="profile-modal-backdrop"></div>
-
 
     <div
         class="profile-modal-content"
@@ -1619,39 +1247,21 @@ $availabilityLabel =
         aria-modal="true"
         aria-labelledby="editProfileTitle">
 
-
         <!-- HEADER -->
-
         <div class="profile-modal-header">
-
             <div>
-
                 <span class="profile-modal-icon">
                     <i class="fa-solid fa-user-pen"></i>
                 </span>
 
                 <div>
-
-                    <h2 id="editProfileTitle">
-                        Edit Profile
-                    </h2>
-
-                    <p>
-                        Update your personal and professional information.
-                    </p>
-
+                    <h2 id="editProfileTitle">Edit Profile</h2>
+                    <p>Update your personal and professional information.</p>
                 </div>
-
             </div>
 
-
-            <button
-                type="button"
-                class="profile-modal-close"
-                data-close-profile-modal>
-
+            <button type="button" class="profile-modal-close" data-close-profile-modal>
                 <i class="fa-solid fa-xmark"></i>
-
             </button>
 
         </div>
@@ -1687,12 +1297,7 @@ $availabilityLabel =
                     </div>
                 </div>
 
-
                 <div class="profile-form-grid">
-
-
-                    <!-- FULL NAME -->
-
                     <div class="profile-form-group full-width">
                         <label for="editFullName">
                             Full Name
@@ -1704,36 +1309,26 @@ $availabilityLabel =
                             <input type="text" id="editFullName" name="full_name"
                                 value="<?= htmlspecialchars($fullName) ?>"
                                 placeholder="Enter your full name" maxlength="100" required>
-
                         </div>
-
                     </div>
 
-
                     <!-- EMAIL -->
-
                     <div class="profile-form-group">
-
                         <label for="editEmail">
                             Email Address
                             <span>*</span>
                         </label>
 
                         <div class="profile-input-wrapper">
-
                             <i class="fa-regular fa-envelope"></i>
-
                             <input type="email" id="editEmail" name="email"
                                 value="<?= htmlspecialchars($email) ?>"
                                 placeholder="example@email.com" maxlength="150" required>
                         </div>
                     </div>
 
-
                     <!-- PHONE -->
-
                     <div class="profile-form-group">
-
                         <label for="editPhone">
                             Phone Number
                             <span>*</span>
@@ -1745,74 +1340,44 @@ $availabilityLabel =
                                 value="<?= htmlspecialchars($phone) ?>"
                                 placeholder="07XXXXXXXX" maxlength="15" required>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
-
             <!-- PROFESSIONAL INFORMATION -->
-
             <div class="profile-form-section">
-
                 <div class="profile-form-section-title">
-
                     <i class="fa-solid fa-briefcase"></i>
-
                     <div>
-
-                        <h3>
-                            Professional Information
-                        </h3>
-
-                        <p>
-                            Help clients understand your experience and availability.
-                        </p>
-
+                        <h3>Professional Information</h3>
+                        <p>Help clients understand your experience and availability.</p>
                     </div>
-
                 </div>
 
-
                 <div class="profile-form-grid">
-
-
                     <!-- BIO -->
-
                     <div class="profile-form-group full-width">
-
                         <label for="editBio">
                             About You
                         </label>
-
                         <textarea id="editBio" name="bio" rows="5" maxlength="1000"
                             placeholder="Tell clients about your skills, experience and the services you provide..."><?= htmlspecialchars($bio) ?></textarea>
 
                         <div class="profile-character-count">
-
                             <span id="bioCharacterCount">
                                 <?= mb_strlen($bio) ?>
                             </span>
-
                             / 1000
-
                         </div>
-
                     </div>
 
-
                     <!-- EXPERIENCE -->
-
                     <div class="profile-form-group">
-
                         <label for="editExperience">
                             Years of Experience
                         </label>
 
                         <div class="profile-input-wrapper">
-
                             <i class="fa-solid fa-award"></i>
 
                             <input type="number" id="editExperience" name="years_experience"
@@ -1825,15 +1390,12 @@ $availabilityLabel =
 
 
                     <!-- LOCATION -->
-
                     <div class="profile-form-group">
-
                         <label for="editLocation">
                             Location
                         </label>
 
                         <div class="profile-input-wrapper">
-
                             <i class="fa-solid fa-location-dot"></i>
 
                             <input type="text" id="editLocation" name="location_name"
@@ -2167,12 +1729,9 @@ document.addEventListener('DOMContentLoaded', function () {
         changeProfilePhotoBtn.addEventListener(
             'click',
             function () {
-
                 profileImageInput.click();
-
             }
         );
-
     }
 
 
@@ -2213,23 +1772,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 const maxSize =
                     5 * 1024 * 1024;
-
-
                 if (
                     file.size > maxSize
                 ) {
-
                     alert(
                         'Profile image must not be larger than 5MB.'
                     );
-
                     this.value = '';
-
                     return;
-
                 }
-
-
                 /*
                 |--------------------------------------------------------------------------
                 | Validate File Type
@@ -2237,98 +1788,67 @@ document.addEventListener('DOMContentLoaded', function () {
                 */
 
                 const allowedTypes = [
-
                     'image/jpeg',
                     'image/png',
                     'image/webp'
-
                 ];
-
 
                 if (
                     !allowedTypes.includes(
                         file.type
                     )
                 ) {
-
                     alert(
                         'Please select a JPG, PNG or WEBP image.'
                     );
-
                     this.value = '';
-
                     return;
-
                 }
-
-
                 /*
                 |--------------------------------------------------------------------------
                 | Show File Name
                 |--------------------------------------------------------------------------
                 */
-
                 if (
                     profileImageFileName
                 ) {
-
                     profileImageFileName.textContent =
                         file.name;
-
                 }
-
-
                 /*
                 |--------------------------------------------------------------------------
                 | Preview Image
                 |--------------------------------------------------------------------------
                 */
-
                 const reader =
                     new FileReader();
-
-
                 reader.onload =
                     function (event) {
-
-
                         /*
                         |--------------------------------------------------------------------------
                         | Update Preview
                         |--------------------------------------------------------------------------
                         */
-
                         if (
                             profileImagePreview
                         ) {
-
                             profileImagePreview.src =
                                 event.target.result;
-
                             profileImagePreview.style.display =
                                 'block';
-
                         }
-
-
                         /*
                         |--------------------------------------------------------------------------
                         | Hide Placeholder
                         |--------------------------------------------------------------------------
                         */
-
                         if (
                             profileImagePlaceholder
                         ) {
-
                             profileImagePlaceholder.style.display =
                                 'none';
-
                         }
-
                     };
-
-
                 reader.readAsDataURL(
                     file
                 );

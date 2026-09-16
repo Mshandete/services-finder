@@ -223,3 +223,64 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const bookingForm = document.getElementById("quickBookingForm");
+
+    if (!bookingForm) {
+        return;
+    }
+
+    const bookingTypeInputs = bookingForm.querySelectorAll(
+        'input[name="booking_type"]'
+    );
+
+    const scheduleFields = document.getElementById("scheduleFields");
+
+    const scheduledDate = document.getElementById("scheduledDate");
+    const scheduledTime = document.getElementById("scheduledTime");
+
+    const updateBookingType = () => {
+        const selected = bookingForm.querySelector(
+            'input[name="booking_type"]:checked'
+        );
+
+        if (!selected) {
+            return;
+        }
+
+        const isSchedule = selected.value === "schedule";
+
+        scheduleFields.hidden = !isSchedule;
+
+        if (scheduledDate) {
+            scheduledDate.required = isSchedule;
+        }
+
+        if (scheduledTime) {
+            scheduledTime.required = isSchedule;
+        }
+
+        bookingTypeInputs.forEach((input) => {
+            const option = input.closest(".booking-type-option");
+
+            if (!option) {
+                return;
+            }
+
+            option.classList.toggle(
+                "active",
+                input.checked
+            );
+        });
+    };
+
+    bookingTypeInputs.forEach((input) => {
+        input.addEventListener(
+            "change",
+            updateBookingType
+        );
+    });
+
+    updateBookingType();
+});
