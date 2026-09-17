@@ -37,7 +37,8 @@ if (!in_array($page, $allowedPages, true)) {
     <link rel="stylesheet" href="../assets/css/provider-dashboard.css">
     <link rel="stylesheet" href="../assets/css/services.css">
     <link rel="stylesheet" href="../assets/css/profile.css">
-    <link rel="stylesheet" href="../assets/css/bookings.css">s
+    <link rel="stylesheet" href="../assets/css/bookings.css">
+    <link rel="stylesheet" href="../assets/css/messages.css">
 
 
 </head>

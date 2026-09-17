@@ -1,818 +1,1119 @@
 /* =========================================================
    FINDPRO — MESSAGES
-   Calm / Minimal / Service-focused
+   Shared Client + Provider Messaging UI
    ========================================================= */
 
-.messages-page {
+:root {
+    --messages-green: #2ecc71;
+    --messages-green-dark: #27ae60;
+    --messages-bg: #f7f9f8;
+    --messages-white: #ffffff;
+    --messages-border: #e8ecea;
+    --messages-text: #202624;
+    --messages-muted: #7b8581;
+    --messages-soft: #f1f5f3;
+    --messages-danger: #e74c3c;
+    --messages-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.provider-messages-page,
+.client-messages-page {
     width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 5px 4px 55px;
-    color: #1d2721;
+    color: var(--messages-text);
 }
-
 
 /* =========================================================
-   HEADER
+   PAGE HEADER
    ========================================================= */
 
-.messages-header {
-    padding-bottom: 27px;
-    border-bottom: 1px solid #e8eee9;
-}
-
-.messages-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    margin-bottom: 11px;
-    color: #2ecc71;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-}
-
-.messages-label i {
-    font-size: 11px;
-}
-
-.messages-header h1 {
-    margin: 0;
-    color: #18211c;
-    font-size: clamp(29px, 3vw, 39px);
-    font-weight: 650;
-    line-height: 1.05;
-    letter-spacing: -.045em;
-}
-
-.messages-header p {
-    margin: 10px 0 0;
-    color: #849087;
-    font-size: 12px;
-    line-height: 1.7;
-}
-
-
-/* =========================================================
-   WORKSPACE
-   ========================================================= */
-
-.messages-workspace {
-    display: grid;
-    grid-template-columns: 325px minmax(0, 1fr);
-    min-height: 620px;
-    margin-top: 25px;
-    overflow: hidden;
-    border: 1px solid #e8eee9;
-    border-radius: 12px;
-    background: #fff;
-}
-
-
-/* =========================================================
-   CONVERSATIONS PANEL
-   ========================================================= */
-
-.conversations-panel {
-    min-width: 0;
-    border-right: 1px solid #e8eee9;
-    background: #fbfcfb;
-}
-
-.conversations-heading {
+.provider-messages-page .messages-page-header,
+.client-messages-page .messages-page-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
-    padding: 0 19px;
-    border-bottom: 1px solid #edf1ed;
+    gap: 20px;
+    margin-bottom: 22px;
 }
 
-.conversations-heading > div {
+.provider-messages-page .messages-page-header h1,
+.client-messages-page .messages-page-header h1 {
+    margin: 0;
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--messages-text);
+}
+
+.provider-messages-page .messages-page-header p,
+.client-messages-page .messages-page-header p {
+    margin: 7px 0 0;
+    font-size: 14px;
+    color: var(--messages-muted);
+}
+
+/* =========================================================
+   MAIN MESSAGES LAYOUT
+   ========================================================= */
+
+.provider-messages-page .messages-container,
+.client-messages-page .messages-container {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    height: calc(100vh - 185px);
+    min-height: 560px;
+    overflow: hidden;
+    background: var(--messages-white);
+    border: 1px solid var(--messages-border);
+    border-radius: 16px;
+    box-shadow: var(--messages-shadow);
+}
+
+/* =========================================================
+   CONVERSATIONS SIDEBAR
+   ========================================================= */
+
+.provider-messages-page .messages-conversations,
+.client-messages-page .messages-conversations {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--messages-white);
+    border-right: 1px solid var(--messages-border);
+}
+
+.provider-messages-page .conversations-header,
+.client-messages-page .conversations-header {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 18px 18px 14px;
+    border-bottom: 1px solid var(--messages-border);
 }
 
-.conversations-heading span {
-    color: #4d5951;
-    font-size: 11px;
+.provider-messages-page .conversations-header h2,
+.client-messages-page .conversations-header h2 {
+    margin: 0;
+    font-size: 16px;
     font-weight: 700;
 }
 
-.conversations-heading strong {
-    display: flex;
+.provider-messages-page .conversation-count,
+.client-messages-page .conversation-count {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 19px;
-    height: 19px;
-    padding: 0 5px;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 7px;
     border-radius: 20px;
-    background: #e9f8ee;
-    color: #2b9554;
-    font-size: 9px;
+    background: var(--messages-soft);
+    color: var(--messages-green-dark);
+    font-size: 12px;
+    font-weight: 700;
 }
-
-
-/* =========================================================
-   SEARCH
-   ========================================================= */
-
-.conversation-search {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    height: 40px;
-    margin: 14px 16px 10px;
-    padding: 0 11px;
-    border: 1px solid #e5ebe6;
-    border-radius: 7px;
-    background: #fff;
-    transition: .2s ease;
-}
-
-.conversation-search:focus-within {
-    border-color: #b9e8c9;
-    box-shadow: 0 0 0 3px rgba(46, 204, 113, .06);
-}
-
-.conversation-search i {
-    color: #a1aaa4;
-    font-size: 10px;
-}
-
-.conversation-search input {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    outline: 0;
-    background: transparent;
-    color: #37423b;
-    font-family: inherit;
-    font-size: 10.5px;
-}
-
-.conversation-search input::placeholder {
-    color: #a4ada7;
-}
-
 
 /* =========================================================
    CONVERSATION LIST
    ========================================================= */
 
-.conversation-list {
-    position: relative;
-    height: calc(100% - 118px);
+.provider-messages-page .conversation-list,
+.client-messages-page .conversation-list {
+    flex: 1;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: #dce5de transparent;
+    scrollbar-color: #d8dfdc transparent;
 }
 
-.conversation-list::-webkit-scrollbar {
-    width: 4px;
-}
-
-.conversation-list::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #dce5de;
-}
-
-
-/* =========================================================
-   CONVERSATION ITEM
-   ========================================================= */
-
-.conversation-item {
+.provider-messages-page .conversation-item,
+.client-messages-page .conversation-item {
     position: relative;
-    width: 100%;
     display: flex;
     align-items: center;
-    gap: 11px;
-    padding: 14px 17px;
-    border: 0;
-    border-bottom: 1px solid #edf1ed;
-    background: transparent;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 16px;
     color: inherit;
-    font-family: inherit;
-    text-align: left;
-    cursor: pointer;
-    transition: .2s ease;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f2f1;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
 }
 
-.conversation-item:hover {
-    background: #f5f9f6;
+.provider-messages-page .conversation-item:hover,
+.client-messages-page .conversation-item:hover {
+    background: #f8fbf9;
 }
 
-.conversation-item.active {
-    background: #f0f9f3;
+.provider-messages-page .conversation-item.active,
+.client-messages-page .conversation-item.active {
+    background: #effaf4;
+    border-left: 3px solid var(--messages-green);
+    padding-left: 13px;
 }
-
-.conversation-item.active::before {
-    content: "";
-    position: absolute;
-    top: 13px;
-    bottom: 13px;
-    left: 0;
-    width: 2px;
-    border-radius: 0 4px 4px 0;
-    background: #2ecc71;
-}
-
 
 /* =========================================================
-   AVATAR
+   AVATARS
    ========================================================= */
 
-.conversation-avatar {
-    position: relative;
-    width: 43px;
-    height: 43px;
-    min-width: 43px;
+.provider-messages-page .conversation-avatar,
+.client-messages-page .conversation-avatar,
+.provider-messages-page .chat-avatar,
+.client-messages-page .chat-avatar {
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #eaf1ed;
 }
 
-.conversation-avatar img {
+.provider-messages-page .conversation-avatar img,
+.client-messages-page .conversation-avatar img,
+.provider-messages-page .chat-avatar img,
+.client-messages-page .chat-avatar img {
+    display: block;
     width: 100%;
     height: 100%;
-    display: block;
     object-fit: cover;
-    border-radius: 50%;
-    background: #e9efeb;
 }
 
-.online-dot {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 9px;
-    height: 9px;
-    border: 2px solid #fbfcfb;
-    border-radius: 50%;
-    background: #2ecc71;
+.provider-messages-page .avatar-placeholder,
+.client-messages-page .avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #7f8b86;
+    font-size: 17px;
 }
-
 
 /* =========================================================
-   CONVERSATION CONTENT
+   CONVERSATION INFORMATION
    ========================================================= */
 
-.conversation-content {
+.provider-messages-page .conversation-info,
+.client-messages-page .conversation-info {
     min-width: 0;
     flex: 1;
 }
 
-.conversation-top,
-.conversation-bottom {
+.provider-messages-page .conversation-top,
+.client-messages-page .conversation-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
 }
 
-.conversation-top {
-    margin-bottom: 5px;
-}
-
-.conversation-top strong {
+.provider-messages-page .conversation-name,
+.client-messages-page .conversation-name {
+    min-width: 0;
     overflow: hidden;
-    color: #303b34;
-    font-size: 10.5px;
-    font-weight: 700;
+    color: var(--messages-text);
+    font-size: 14px;
+    font-weight: 650;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.conversation-top time {
-    flex-shrink: 0;
-    color: #a2aaa5;
-    font-size: 8.5px;
+.provider-messages-page .conversation-time,
+.client-messages-page .conversation-time {
+    flex: 0 0 auto;
+    color: #9aa39f;
+    font-size: 11px;
 }
 
-.conversation-bottom span {
-    overflow: hidden;
-    color: #8b958e;
-    font-size: 9.5px;
-    line-height: 1.3;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.unread-count {
+.provider-messages-page .conversation-preview,
+.client-messages-page .conversation-preview {
     display: flex;
     align-items: center;
+    gap: 7px;
+    margin-top: 5px;
+}
+
+.provider-messages-page .conversation-message,
+.client-messages-page .conversation-message {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--messages-muted);
+    font-size: 12px;
+    line-height: 1.45;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.provider-messages-page .conversation-item.unread .conversation-name,
+.client-messages-page .conversation-item.unread .conversation-name {
+    font-weight: 750;
+}
+
+.provider-messages-page .conversation-item.unread .conversation-message,
+.client-messages-page .conversation-item.unread .conversation-message {
+    color: var(--messages-text);
+    font-weight: 550;
+}
+
+/* =========================================================
+   UNREAD BADGE
+   ========================================================= */
+
+.provider-messages-page .unread-badge,
+.client-messages-page .unread-badge {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    min-width: 17px;
-    height: 17px;
-    padding: 0 4px;
-    border-radius: 50%;
-    background: #2ecc71;
-    color: #fff;
-    font-size: 8px;
+    flex: 0 0 auto;
+    min-width: 19px;
+    height: 19px;
+    padding: 0 5px;
+    border-radius: 20px;
+    background: var(--messages-green);
+    color: #ffffff;
+    font-size: 10px;
     font-weight: 700;
 }
 
-
 /* =========================================================
-   NO RESULTS
+   EMPTY CONVERSATIONS
    ========================================================= */
 
-.conversation-no-results {
-    display: none;
-    align-items: center;
+.provider-messages-page .conversations-empty,
+.client-messages-page .conversations-empty {
+    display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    min-height: 180px;
-    padding: 20px;
+    min-height: 220px;
+    padding: 30px 20px;
     text-align: center;
-    color: #a0aaa3;
 }
 
-.conversation-no-results i {
-    margin-bottom: 9px;
-    color: #2ecc71;
-    font-size: 20px;
+.provider-messages-page .conversations-empty i,
+.client-messages-page .conversations-empty i {
+    margin-bottom: 12px;
+    color: #b8c2bd;
+    font-size: 30px;
 }
 
-.conversation-no-results p {
+.provider-messages-page .conversations-empty p,
+.client-messages-page .conversations-empty p {
+    max-width: 230px;
     margin: 0;
-    font-size: 10px;
+    color: var(--messages-muted);
+    font-size: 13px;
+    line-height: 1.6;
 }
-
 
 /* =========================================================
    CHAT PANEL
    ========================================================= */
 
-.chat-panel {
-    position: relative;
+.provider-messages-page .chat-panel,
+.client-messages-page .chat-panel {
     display: flex;
-    min-width: 0;
     flex-direction: column;
-    background: #fff;
+    min-width: 0;
+    min-height: 0;
+    background: var(--messages-bg);
 }
 
+/* =========================================================
+   EMPTY CHAT STATE
+   ========================================================= */
+
+.provider-messages-page .chat-empty,
+.client-messages-page .chat-empty,
+.provider-messages-page .messages-empty-state,
+.client-messages-page .messages-empty-state {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.provider-messages-page .chat-empty-icon,
+.client-messages-page .chat-empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 18px;
+    border-radius: 50%;
+    background: #eaf7ef;
+    color: var(--messages-green-dark);
+    font-size: 27px;
+}
+
+.provider-messages-page .chat-empty h3,
+.client-messages-page .chat-empty h3,
+.provider-messages-page .messages-empty-state h3,
+.client-messages-page .messages-empty-state h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.provider-messages-page .chat-empty p,
+.client-messages-page .chat-empty p,
+.provider-messages-page .messages-empty-state p,
+.client-messages-page .messages-empty-state p {
+    max-width: 380px;
+    margin: 0;
+    color: var(--messages-muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
 
 /* =========================================================
    CHAT HEADER
    ========================================================= */
 
-.chat-header {
+.provider-messages-page .chat-header,
+.client-messages-page .chat-header {
     display: flex;
     align-items: center;
-    min-height: 64px;
-    padding: 0 21px;
-    border-bottom: 1px solid #edf1ed;
+    justify-content: space-between;
+    gap: 15px;
+    min-height: 76px;
+    padding: 14px 20px;
+    background: var(--messages-white);
+    border-bottom: 1px solid var(--messages-border);
 }
 
-.chat-provider-avatar {
-    position: relative;
-    width: 39px;
-    height: 39px;
-    min-width: 39px;
-    margin-right: 11px;
-}
-
-.chat-provider-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    background: #e9efeb;
-}
-
-.chat-online-dot {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 8px;
-    height: 8px;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    background: #2ecc71;
-    opacity: 0;
-}
-
-.chat-online-dot.visible {
-    opacity: 1;
-}
-
-.chat-provider-info {
+.provider-messages-page .chat-user,
+.client-messages-page .chat-user {
+    display: flex;
+    align-items: center;
     min-width: 0;
-    flex: 1;
+    gap: 12px;
 }
 
-.chat-provider-info h2 {
+.provider-messages-page .chat-user-info,
+.client-messages-page .chat-user-info {
+    min-width: 0;
+}
+
+.provider-messages-page .chat-user-name,
+.client-messages-page .chat-user-name {
+    margin: 0;
     overflow: hidden;
-    margin: 0 0 4px;
-    color: #29342d;
-    font-size: 12px;
+    color: var(--messages-text);
+    font-size: 15px;
     font-weight: 700;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.chat-provider-info > span {
-    display: block;
-    overflow: hidden;
-    color: #9aa39d;
-    font-size: 9px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.provider-messages-page .chat-user-status,
+.client-messages-page .chat-user-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+    color: var(--messages-muted);
+    font-size: 11px;
 }
 
-.chat-divider {
-    margin: 0 4px;
-    color: #c4cbc6;
-}
-
-.chat-more-button {
-    width: 31px;
-    height: 31px;
-    margin-left: 10px;
-    border: 0;
+.provider-messages-page .chat-user-status::before,
+.client-messages-page .chat-user-status::before {
+    content: "";
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: transparent;
-    color: #9aa39d;
-    cursor: pointer;
-    transition: .2s ease;
+    background: #bdc5c1;
 }
 
-.chat-more-button:hover {
-    background: #f3f6f4;
-    color: #4d5951;
+.provider-messages-page .chat-user-status.online::before,
+.client-messages-page .chat-user-status.online::before {
+    background: var(--messages-green);
 }
-
 
 /* =========================================================
-   MOBILE BACK
+   CHAT HEADER ACTIONS
    ========================================================= */
 
-.mobile-back-button {
-    display: none;
+.provider-messages-page .chat-actions,
+.client-messages-page .chat-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
+.provider-messages-page .chat-action,
+.client-messages-page .chat-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--messages-border);
+    border-radius: 9px;
+    background: var(--messages-white);
+    color: #65716c;
+    text-decoration: none;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.provider-messages-page .chat-action:hover,
+.client-messages-page .chat-action:hover {
+    border-color: #cfe8d8;
+    background: #effaf4;
+    color: var(--messages-green-dark);
+}
 
 /* =========================================================
    BOOKING CONTEXT
    ========================================================= */
 
-.chat-booking-context {
+.provider-messages-page .booking-context,
+.client-messages-page .booking-context {
     display: flex;
     align-items: center;
-    gap: 11px;
-    margin: 15px 20px 3px;
-    padding: 12px 13px;
-    border: 1px solid #e7eee9;
-    border-left: 3px solid #2ecc71;
-    border-radius: 7px;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 11px 20px;
     background: #f8fbf9;
+    border-bottom: 1px solid var(--messages-border);
 }
 
-.booking-context-icon {
-    width: 31px;
-    height: 31px;
-    min-width: 31px;
+.provider-messages-page .booking-context-info,
+.client-messages-page .booking-context-info {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 10px;
+}
+
+.provider-messages-page .booking-context-icon,
+.client-messages-page .booking-context-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
-    background: #e8f7ed;
-    color: #2a9955;
-    font-size: 11px;
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #e8f7ee;
+    color: var(--messages-green-dark);
+    font-size: 13px;
 }
 
-.booking-context-info {
+.provider-messages-page .booking-context-text,
+.client-messages-page .booking-context-text {
     min-width: 0;
-    flex: 1;
 }
 
-.booking-context-info span {
+.provider-messages-page .booking-context-label,
+.client-messages-page .booking-context-label {
     display: block;
-    margin-bottom: 3px;
-    color: #9ba49e;
-    font-size: 8px;
-    font-weight: 650;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-}
-
-.booking-context-info strong {
-    display: block;
-    overflow: hidden;
-    margin-bottom: 3px;
-    color: #3b4740;
+    margin-bottom: 2px;
+    color: #8a9490;
     font-size: 10px;
-    font-weight: 700;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.provider-messages-page .booking-context-value,
+.client-messages-page .booking-context-value {
+    overflow: hidden;
+    color: var(--messages-text);
+    font-size: 12px;
+    font-weight: 600;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.booking-context-info small {
-    display: block;
-    color: #8b958e;
-    font-size: 8.5px;
+.provider-messages-page .booking-context-link,
+.client-messages-page .booking-context-link {
+    flex: 0 0 auto;
+    color: var(--messages-green-dark);
+    font-size: 12px;
+    font-weight: 650;
+    text-decoration: none;
 }
 
-.booking-context-status {
-    flex-shrink: 0;
-    padding: 4px 7px;
-    border-radius: 20px;
-    background: #eaf8ef;
-    color: #2a9251;
-    font-size: 8px;
-    font-weight: 700;
+.provider-messages-page .booking-context-link:hover,
+.client-messages-page .booking-context-link:hover {
+    text-decoration: underline;
 }
-
 
 /* =========================================================
-   CHAT MESSAGES
+   MESSAGE AREA
    ========================================================= */
 
-.chat-messages {
+.provider-messages-page .chat-messages,
+.client-messages-page .chat-messages {
     flex: 1;
-    min-height: 350px;
+    min-height: 0;
     overflow-y: auto;
-    padding: 24px 28px 22px;
+    padding: 22px 24px;
     scrollbar-width: thin;
-    scrollbar-color: #dce5de transparent;
+    scrollbar-color: #d1dad5 transparent;
 }
 
-.chat-messages::-webkit-scrollbar {
-    width: 4px;
+/* =========================================================
+   MESSAGE GROUP / DATE
+   ========================================================= */
+
+.provider-messages-page .message-date,
+.client-messages-page .message-date {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 5px 0 20px;
+    color: #a0aaa5;
+    font-size: 10px;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-.chat-messages::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #dce5de;
+.provider-messages-page .message-date::before,
+.provider-messages-page .message-date::after,
+.client-messages-page .message-date::before,
+.client-messages-page .message-date::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e4e9e6;
 }
-
 
 /* =========================================================
    MESSAGE ROW
    ========================================================= */
 
-.message-row {
+.provider-messages-page .message-row,
+.client-messages-page .message-row {
     display: flex;
     width: 100%;
-    margin-bottom: 13px;
+    margin-bottom: 10px;
 }
 
-.message-provider {
-    justify-content: flex-start;
-}
-
-.message-client {
+.provider-messages-page .message-row.sent,
+.client-messages-page .message-row.sent {
     justify-content: flex-end;
 }
 
+.provider-messages-page .message-row.received,
+.client-messages-page .message-row.received {
+    justify-content: flex-start;
+}
 
 /* =========================================================
    MESSAGE BUBBLE
    ========================================================= */
 
-.message-bubble {
-    max-width: min(67%, 440px);
-    padding: 10px 12px 8px;
-    border-radius: 10px;
+.provider-messages-page .message-bubble,
+.client-messages-page .message-bubble {
+    position: relative;
+    max-width: min(72%, 600px);
+    padding: 10px 13px 8px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.55;
+    word-break: break-word;
 }
 
-.message-provider .message-bubble {
-    border: 1px solid #e9eeea;
-    border-bottom-left-radius: 3px;
-    background: #fafcfa;
+.provider-messages-page .message-row.sent .message-bubble,
+.client-messages-page .message-row.sent .message-bubble {
+    border-bottom-right-radius: 4px;
+    background: var(--messages-green);
+    color: #ffffff;
 }
 
-.message-client .message-bubble {
-    border-bottom-right-radius: 3px;
-    background: #edf9f1;
+.provider-messages-page .message-row.received .message-bubble,
+.client-messages-page .message-row.received .message-bubble {
+    border-bottom-left-radius: 4px;
+    background: var(--messages-white);
+    color: var(--messages-text);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.035);
 }
-
-.message-bubble p {
-    margin: 0 0 5px;
-    color: #48534c;
-    font-size: 10.5px;
-    line-height: 1.65;
-}
-
-.message-bubble time {
-    display: block;
-    color: #a1aaa4;
-    font-size: 8px;
-    text-align: right;
-}
-
 
 /* =========================================================
-   COMPOSER
+   MESSAGE TEXT
    ========================================================= */
 
-.message-composer {
+.provider-messages-page .message-text,
+.client-messages-page .message-text {
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+/* =========================================================
+   MESSAGE META
+   ========================================================= */
+
+.provider-messages-page .message-meta,
+.client-messages-page .message-meta {
     display: flex;
     align-items: center;
-    gap: 9px;
-    min-height: 61px;
-    padding: 10px 18px;
-    border-top: 1px solid #edf1ed;
-    background: #fff;
+    justify-content: flex-end;
+    gap: 5px;
+    margin-top: 4px;
+    font-size: 9px;
 }
 
-.message-composer input {
-    width: 100%;
-    height: 39px;
-    padding: 0 11px;
-    border: 1px solid #e4eae5;
-    border-radius: 7px;
-    outline: none;
-    background: #fafcfa;
-    color: #3d4941;
-    font-family: inherit;
-    font-size: 10.5px;
-    transition: .2s ease;
+.provider-messages-page .message-row.sent .message-meta,
+.client-messages-page .message-row.sent .message-meta {
+    color: rgba(255, 255, 255, 0.78);
 }
 
-.message-composer input:focus {
-    border-color: #bce9ca;
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(46, 204, 113, .05);
+.provider-messages-page .message-row.received .message-meta,
+.client-messages-page .message-row.received .message-meta {
+    color: #a0aaa5;
 }
 
-.message-composer input::placeholder {
-    color: #a3aba6;
+.provider-messages-page .message-status,
+.client-messages-page .message-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
 }
 
-.composer-attachment {
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
-    border: 0;
-    background: transparent;
-    color: #9aa39d;
-    cursor: pointer;
-    transition: .2s ease;
-}
+/* =========================================================
+   NO MESSAGES
+   ========================================================= */
 
-.composer-attachment:hover {
-    color: #2ecc71;
-}
-
-.send-message-button {
-    width: 35px;
-    height: 35px;
-    flex-shrink: 0;
+.provider-messages-page .no-messages,
+.client-messages-page .no-messages {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 0;
-    border-radius: 8px;
-    background: #2ecc71;
-    color: #fff;
+    min-height: 280px;
+    text-align: center;
+}
+
+.provider-messages-page .no-messages i,
+.client-messages-page .no-messages i {
+    margin-bottom: 12px;
+    color: #b9c3be;
+    font-size: 28px;
+}
+
+.provider-messages-page .no-messages p,
+.client-messages-page .no-messages p {
+    margin: 0;
+    color: var(--messages-muted);
+    font-size: 13px;
+}
+
+/* =========================================================
+   MESSAGE COMPOSER
+   ========================================================= */
+
+.provider-messages-page .message-composer,
+.client-messages-page .message-composer {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding: 13px 18px;
+    background: var(--messages-white);
+    border-top: 1px solid var(--messages-border);
+}
+
+.provider-messages-page .message-input-wrap,
+.client-messages-page .message-input-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.provider-messages-page .message-input,
+.client-messages-page .message-input,
+.provider-messages-page textarea[name="message"],
+.client-messages-page textarea[name="message"] {
+    display: block;
+    width: 100%;
+    min-height: 43px;
+    max-height: 130px;
+    padding: 11px 14px;
+    resize: none;
+    outline: none;
+    border: 1px solid var(--messages-border);
+    border-radius: 11px;
+    background: #f8faf9;
+    color: var(--messages-text);
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.45;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.provider-messages-page .message-input:focus,
+.client-messages-page .message-input:focus,
+.provider-messages-page textarea[name="message"]:focus,
+.client-messages-page textarea[name="message"]:focus {
+    border-color: #a9dfbd;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.08);
+}
+
+.provider-messages-page .message-input::placeholder,
+.client-messages-page .message-input::placeholder,
+.provider-messages-page textarea[name="message"]::placeholder,
+.client-messages-page textarea[name="message"]::placeholder {
+    color: #a2aba7;
+}
+
+/* =========================================================
+   SEND BUTTON
+   ========================================================= */
+
+.provider-messages-page .send-message-btn,
+.client-messages-page .send-message-btn,
+.provider-messages-page button[type="submit"],
+.client-messages-page button[type="submit"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 43px;
+    height: 43px;
+    padding: 0;
     cursor: pointer;
-    transition: .2s ease;
+    border: 0;
+    border-radius: 11px;
+    background: var(--messages-green);
+    color: #ffffff;
+    font-size: 14px;
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
 }
 
-.send-message-button:hover {
-    background: #27b964;
-    transform: translateY(-1px);
+.provider-messages-page .send-message-btn:hover,
+.client-messages-page .send-message-btn:hover,
+.provider-messages-page button[type="submit"]:hover,
+.client-messages-page button[type="submit"]:hover {
+    background: var(--messages-green-dark);
+    box-shadow: 0 5px 14px rgba(46, 204, 113, 0.2);
 }
 
-.send-message-button i {
+.provider-messages-page .send-message-btn:active,
+.client-messages-page .send-message-btn:active,
+.provider-messages-page button[type="submit"]:active,
+.client-messages-page button[type="submit"]:active {
+    transform: translateY(1px);
+}
+
+.provider-messages-page .send-message-btn:disabled,
+.client-messages-page .send-message-btn:disabled,
+.provider-messages-page button[type="submit"]:disabled,
+.client-messages-page button[type="submit"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+}
+
+/* =========================================================
+   COMPOSER FOOTER / HINT
+   ========================================================= */
+
+.provider-messages-page .composer-footer,
+.client-messages-page .composer-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 2px;
+}
+
+.provider-messages-page .composer-hint,
+.client-messages-page .composer-hint {
+    margin-top: 5px;
+    color: #a1aaa6;
     font-size: 10px;
 }
 
+.provider-messages-page .character-count,
+.client-messages-page .character-count {
+    margin-top: 5px;
+    color: #a1aaa6;
+    font-size: 10px;
+    text-align: right;
+}
 
 /* =========================================================
-   TABLET
+   ALERTS
    ========================================================= */
 
-@media (max-width: 950px) {
+.provider-messages-page .messages-alert,
+.client-messages-page .messages-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding: 12px 14px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+}
 
-    .messages-workspace {
+.provider-messages-page .messages-alert i,
+.client-messages-page .messages-alert i {
+    margin-top: 2px;
+}
+
+.provider-messages-page .messages-alert.success,
+.client-messages-page .messages-alert.success {
+    border-color: #ccebd8;
+    background: #f0fbf4;
+    color: #247a48;
+}
+
+.provider-messages-page .messages-alert.error,
+.client-messages-page .messages-alert.error {
+    border-color: #f2ceca;
+    background: #fff5f4;
+    color: #b43c32;
+}
+
+/* =========================================================
+   SCROLLBARS
+   ========================================================= */
+
+.provider-messages-page .conversation-list::-webkit-scrollbar,
+.provider-messages-page .chat-messages::-webkit-scrollbar,
+.client-messages-page .conversation-list::-webkit-scrollbar,
+.client-messages-page .chat-messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+.provider-messages-page .conversation-list::-webkit-scrollbar-track,
+.provider-messages-page .chat-messages::-webkit-scrollbar-track,
+.client-messages-page .conversation-list::-webkit-scrollbar-track,
+.client-messages-page .chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.provider-messages-page .conversation-list::-webkit-scrollbar-thumb,
+.provider-messages-page .chat-messages::-webkit-scrollbar-thumb,
+.client-messages-page .conversation-list::-webkit-scrollbar-thumb,
+.client-messages-page .chat-messages::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #d4ddd8;
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+    .provider-messages-page .messages-container,
+    .client-messages-page .messages-container {
         grid-template-columns: 285px minmax(0, 1fr);
     }
 
-    .message-bubble {
-        max-width: 75%;
+    .provider-messages-page .message-bubble,
+    .client-messages-page .message-bubble {
+        max-width: 78%;
     }
-
 }
 
-
 /* =========================================================
-   MOBILE
+   RESPONSIVE — MOBILE
    ========================================================= */
 
-@media (max-width: 700px) {
-
-    .messages-page {
-        padding-bottom: 40px;
+@media (max-width: 760px) {
+    .provider-messages-page .messages-page-header,
+    .client-messages-page .messages-page-header {
+        margin-bottom: 15px;
     }
 
-    .messages-header {
-        padding-bottom: 22px;
+    .provider-messages-page .messages-page-header h1,
+    .client-messages-page .messages-page-header h1 {
+        font-size: 22px;
     }
 
-    .messages-header h1 {
-        font-size: 28px;
+    .provider-messages-page .messages-page-header p,
+    .client-messages-page .messages-page-header p {
+        font-size: 12px;
     }
 
-    .messages-header p {
-        font-size: 11px;
-    }
-
-    .messages-workspace {
-        position: relative;
+    .provider-messages-page .messages-container,
+    .client-messages-page .messages-container {
         display: block;
-        min-height: 600px;
-        margin-top: 20px;
-        border-radius: 10px;
+        height: calc(100vh - 145px);
+        min-height: 500px;
+        border-radius: 13px;
     }
 
-    .conversations-panel {
-        width: 100%;
-        min-height: 600px;
+    /*
+     * On mobile, the conversation list remains visible when
+     * no conversation is selected. Once a conversation is
+     * selected, JavaScript can add .mobile-chat-open.
+     */
+
+    .provider-messages-page .messages-conversations,
+    .client-messages-page .messages-conversations {
+        height: 100%;
         border-right: 0;
     }
 
-    .chat-panel {
-        position: absolute;
-        inset: 0;
-        z-index: 5;
+    .provider-messages-page .chat-panel,
+    .client-messages-page .chat-panel {
         display: none;
-        min-height: 600px;
+        height: 100%;
     }
 
-    .messages-workspace.chat-open .conversations-panel {
+    .provider-messages-page .messages-container.mobile-chat-open .messages-conversations,
+    .client-messages-page .messages-container.mobile-chat-open .messages-conversations {
         display: none;
     }
 
-    .messages-workspace.chat-open .chat-panel {
+    .provider-messages-page .messages-container.mobile-chat-open .chat-panel,
+    .client-messages-page .messages-container.mobile-chat-open .chat-panel {
         display: flex;
     }
 
-    .mobile-back-button {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 8px;
-        border: 0;
-        border-radius: 50%;
-        background: #f3f6f4;
-        color: #69736c;
-        cursor: pointer;
+    .provider-messages-page .chat-header,
+    .client-messages-page .chat-header {
+        min-height: 68px;
+        padding: 11px 13px;
     }
 
-    .chat-header {
-        padding: 0 13px;
+    .provider-messages-page .chat-avatar,
+    .client-messages-page .chat-avatar {
+        width: 40px;
+        height: 40px;
     }
 
-    .chat-booking-context {
-        margin: 12px 13px 2px;
+    .provider-messages-page .chat-user-name,
+    .client-messages-page .chat-user-name {
+        font-size: 14px;
     }
 
-    .chat-messages {
-        padding: 19px 14px;
+    .provider-messages-page .chat-actions,
+    .client-messages-page .chat-actions {
+        gap: 5px;
     }
 
-    .message-bubble {
-        max-width: 82%;
+    .provider-messages-page .chat-action,
+    .client-messages-page .chat-action {
+        width: 33px;
+        height: 33px;
     }
 
-    .message-composer {
+    .provider-messages-page .booking-context,
+    .client-messages-page .booking-context {
+        align-items: flex-start;
+        padding: 10px 13px;
+    }
+
+    .provider-messages-page .booking-context-link,
+    .client-messages-page .booking-context-link {
+        display: none;
+    }
+
+    .provider-messages-page .chat-messages,
+    .client-messages-page .chat-messages {
+        padding: 17px 13px;
+    }
+
+    .provider-messages-page .message-bubble,
+    .client-messages-page .message-bubble {
+        max-width: 84%;
+        padding: 9px 11px 7px;
+        font-size: 12px;
+    }
+
+    .provider-messages-page .message-composer,
+    .client-messages-page .message-composer {
+        gap: 7px;
         padding: 9px 10px;
     }
 
+    .provider-messages-page .message-input,
+    .client-messages-page .message-input,
+    .provider-messages-page textarea[name="message"],
+    .client-messages-page textarea[name="message"] {
+        min-height: 41px;
+        padding: 10px 11px;
+    }
+
+    .provider-messages-page .send-message-btn,
+    .client-messages-page .send-message-btn,
+    .provider-messages-page button[type="submit"],
+    .client-messages-page button[type="submit"] {
+        width: 41px;
+        height: 41px;
+    }
 }
 
-
 /* =========================================================
-   SMALL MOBILE
+   SMALL PHONES
    ========================================================= */
 
-@media (max-width: 400px) {
-
-    .conversations-heading {
-        padding: 0 14px;
+@media (max-width: 480px) {
+    .provider-messages-page .messages-page-header,
+    .client-messages-page .messages-page-header {
+        align-items: flex-start;
     }
 
-    .conversation-search {
-        margin-left: 12px;
-        margin-right: 12px;
+    .provider-messages-page .messages-page-header h1,
+    .client-messages-page .messages-page-header h1 {
+        font-size: 20px;
     }
 
-    .conversation-item {
-        padding-left: 13px;
-        padding-right: 13px;
+    .provider-messages-page .messages-container,
+    .client-messages-page .messages-container {
+        height: calc(100vh - 130px);
+        min-height: 460px;
+        border-radius: 10px;
     }
 
-    .booking-context-status {
-        display: none;
+    .provider-messages-page .conversation-item,
+    .client-messages-page .conversation-item {
+        padding: 12px 13px;
     }
 
-    .message-bubble {
+    .provider-messages-page .conversation-avatar,
+    .client-messages-page .conversation-avatar {
+        width: 42px;
+        height: 42px;
+    }
+
+    .provider-messages-page .conversation-name,
+    .client-messages-page .conversation-name {
+        font-size: 13px;
+    }
+
+    .provider-messages-page .conversation-message,
+    .client-messages-page .conversation-message {
+        font-size: 11px;
+    }
+
+    .provider-messages-page .message-bubble,
+    .client-messages-page .message-bubble {
         max-width: 88%;
     }
 
+    .provider-messages-page .chat-empty,
+    .client-messages-page .chat-empty,
+    .provider-messages-page .messages-empty-state,
+    .client-messages-page .messages-empty-state {
+        padding: 25px;
+    }
 }

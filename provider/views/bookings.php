@@ -944,13 +944,13 @@ if ($bookingId === 0) {
                         </div>
 
 
-                        <a
-                            href="dashboard.php?page=messages"
-                            class="provider-booking-message-button"
-                        >
-                            <i class="fa-regular fa-comment"></i>
-                            Message Client
-                        </a>
+<a
+    href="dashboard.php?page=messages&client_id=<?= (int)$bookingDetail['client_user_id'] ?>&booking_id=<?= (int)$bookingDetail['id'] ?>"
+    class="provider-booking-message-button"
+>
+    <i class="fa-regular fa-comment"></i>
+    Message Client
+</a>
 
 
                         <form
@@ -1007,13 +1007,13 @@ if ($bookingId === 0) {
                         </div>
 
 
-                        <a
-                            href="dashboard.php?page=messages"
-                            class="provider-booking-message-button"
-                        >
-                            <i class="fa-regular fa-comment"></i>
-                            Message Client
-                        </a>
+<a
+    href="dashboard.php?page=messages&client_id=<?= (int)$bookingDetail['client_user_id'] ?>&booking_id=<?= (int)$bookingDetail['id'] ?>"
+    class="provider-booking-message-button"
+>
+    <i class="fa-regular fa-comment"></i>
+    Message Client
+</a>
 
 
                         <form

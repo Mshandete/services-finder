@@ -832,9 +832,11 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         </div>
 
-                        <a href="dashboard.php?page=messages">
-                            Message Provider
-                        </a>
+<a
+    href="dashboard.php?page=messages&provider_id=<?= (int)$booking['provider_user_id'] ?>&booking_id=<?= (int)$booking['id'] ?>"
+>
+    Message Provider
+</a>
 
                     </div>
 

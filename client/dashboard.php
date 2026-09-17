@@ -41,20 +41,10 @@ $pageTitle = $pageTitles[$page] ?? 'FindPro Client';
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title><?= htmlspecialchars($pageTitle); ?> | FindPro</title>
-
-    <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
-
-    <!-- Client Dashboard CSS -->
-    <link
-        rel="stylesheet"
-        href="../assets/css/client-dashboard.css"
-    >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/client-dashboard.css">
+    <link rel="stylesheet" href="../assets/css/messages.css">
 
 </head>
 
@@ -64,10 +54,7 @@ $pageTitle = $pageTitles[$page] ?? 'FindPro Client';
 
     <?php include __DIR__ . '/components/sidebar.php'; ?>
 
-    <div
-        class="sidebar-overlay"
-        id="sidebarOverlay"
-    ></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <main class="client-main">
 
@@ -78,15 +65,12 @@ $pageTitle = $pageTitles[$page] ?? 'FindPro Client';
             <?php
 
             $viewPath = __DIR__ . "/views/{$page}.php";
-
             if (file_exists($viewPath)) {
                 include $viewPath;
             } else {
                 include __DIR__ . '/views/home.php';
             }
-
             ?>
-
         </div>
 
     </main>
@@ -94,43 +78,31 @@ $pageTitle = $pageTitles[$page] ?? 'FindPro Client';
 </div>
 
 <nav class="mobile-bottom-nav">
-
-    <a
-        href="dashboard.php?page=home"
-        class="bottom-nav-link <?= $page === 'home' ? 'active' : ''; ?>"
-    >
+    <a href="dashboard.php?page=home"
+        class="bottom-nav-link <?= $page === 'home' ? 'active' : ''; ?>">
         <i class="fa-solid fa-house"></i>
         <span>Home</span>
     </a>
 
-    <a
-        href="dashboard.php?page=services"
-        class="bottom-nav-link <?= $page === 'services' ? 'active' : ''; ?>"
-    >
+    <a href="dashboard.php?page=services"
+        class="bottom-nav-link <?= $page === 'services' ? 'active' : ''; ?>">
         <i class="fa-solid fa-briefcase"></i>
         <span>Services</span>
     </a>
 
-    <a
-        href="dashboard.php?page=bookings"
-        class="bottom-nav-link <?= $page === 'bookings' ? 'active' : ''; ?>"
-    >
+    <a href="dashboard.php?page=bookings"
+        class="bottom-nav-link <?= $page === 'bookings' ? 'active' : ''; ?>">
         <i class="fa-solid fa-calendar-check"></i>
         <span>Bookings</span>
     </a>
 
-    <a
-        href="dashboard.php?page=messages"
-        class="bottom-nav-link <?= $page === 'messages' ? 'active' : ''; ?>"
-    >
+    <a href="dashboard.php?page=messages" class="bottom-nav-link <?= $page === 'messages' ? 'active' : ''; ?>">
         <i class="fa-solid fa-comment-dots"></i>
         <span>Messages</span>
     </a>
 
-    <a
-        href="dashboard.php?page=profile"
-        class="bottom-nav-link <?= $page === 'profile' ? 'active' : ''; ?>"
-    >
+    <a href="dashboard.php?page=profile"
+        class="bottom-nav-link <?= $page === 'profile' ? 'active' : ''; ?>">
         <i class="fa-solid fa-user"></i>
         <span>Profile</span>
     </a>
