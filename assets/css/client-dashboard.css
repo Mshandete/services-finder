@@ -4305,3 +4305,448 @@ img {
     }
 
 }
+
+
+/* =========================================================
+   FINDPRO GLOBAL THEME SYSTEM
+   ========================================================= */
+
+
+:root {
+    --fp-bg: #f7f9f8;
+    --fp-surface: #ffffff;
+    --fp-surface-soft: #f1f5f3;
+    --fp-border: #e4e9e6;
+
+    --fp-text: #1f2933;
+    --fp-text-secondary: #667085;
+    --fp-text-muted: #98a2b3;
+
+    --fp-primary: #2ecc71;
+    --fp-primary-dark: #27ae60;
+    --fp-primary-soft: rgba(46, 204, 113, 0.10);
+
+    --fp-danger: #e74c3c;
+    --fp-warning: #f39c12;
+
+    --fp-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
+
+    --fp-radius: 14px;
+
+    --fp-transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/*
+ * Dark theme
+ *
+ * We intentionally avoid pure black.
+ * This keeps the interface professional and
+ * easier to read for long periods.
+ */
+
+html[data-theme="dark"],
+body[data-theme="dark"],
+body.theme-dark {
+
+    --fp-bg: #111614;
+    --fp-surface: #181d1b;
+    --fp-surface-soft: #202622;
+    --fp-border: #303834;
+
+    --fp-text: #f2f5f3;
+    --fp-text-secondary: #b6c0ba;
+    --fp-text-muted: #7f8b84;
+
+    --fp-primary: #2ecc71;
+    --fp-primary-dark: #27ae60;
+    --fp-primary-soft: rgba(46, 204, 113, 0.13);
+
+    --fp-danger: #ff6b5f;
+    --fp-warning: #f5b041;
+
+    --fp-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   GLOBAL PAGE
+   ========================================================= */
+
+html[data-theme="dark"],
+body[data-theme="dark"],
+body.theme-dark {
+    background-color: var(--fp-bg);
+    color: var(--fp-text);
+}
+
+
+/*
+ * Main dashboard background
+ */
+
+body.theme-dark .client-dashboard,
+body.theme-dark .client-main,
+body.theme-dark .dashboard-content {
+    background-color: var(--fp-bg);
+    color: var(--fp-text);
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+body.theme-dark .sidebar {
+    background-color: var(--fp-surface);
+    border-color: var(--fp-border);
+    color: var(--fp-text);
+}
+
+
+body.theme-dark .sidebar a,
+body.theme-dark .sidebar button,
+body.theme-dark .sidebar span,
+body.theme-dark .sidebar p {
+    color: var(--fp-text-secondary);
+}
+
+
+body.theme-dark .sidebar a:hover,
+body.theme-dark .sidebar a.active {
+    background-color: var(--fp-primary-soft);
+    color: var(--fp-primary);
+}
+
+
+body.theme-dark .sidebar i {
+    color: inherit;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+body.theme-dark .topbar {
+    background-color: var(--fp-surface);
+    border-color: var(--fp-border);
+    color: var(--fp-text);
+}
+
+
+body.theme-dark .topbar h1,
+body.theme-dark .topbar h2,
+body.theme-dark .topbar h3,
+body.theme-dark .topbar span,
+body.theme-dark .topbar p {
+    color: inherit;
+}
+
+
+body.theme-dark .topbar input,
+body.theme-dark .search-input,
+body.theme-dark input[type="search"] {
+    background-color: var(--fp-surface-soft);
+    border-color: var(--fp-border);
+    color: var(--fp-text);
+}
+
+
+body.theme-dark .topbar input::placeholder,
+body.theme-dark .search-input::placeholder,
+body.theme-dark input[type="search"]::placeholder {
+    color: var(--fp-text-muted);
+}
+
+
+/* =========================================================
+   COMMON SURFACES / CARDS
+   ========================================================= */
+
+body.theme-dark .card,
+body.theme-dark .service-card,
+body.theme-dark .booking-card,
+body.theme-dark .favorite-card,
+body.theme-dark .message-card,
+body.theme-dark .profile-card,
+body.theme-dark .dashboard-card,
+body.theme-dark .settings-section {
+    background-color: var(--fp-surface);
+    border-color: var(--fp-border);
+    color: var(--fp-text);
+    box-shadow: var(--fp-shadow);
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+body.theme-dark h1,
+body.theme-dark h2,
+body.theme-dark h3,
+body.theme-dark h4,
+body.theme-dark h5,
+body.theme-dark h6 {
+    color: var(--fp-text);
+}
+
+
+body.theme-dark p {
+    color: var(--fp-text-secondary);
+}
+
+
+body.theme-dark small {
+    color: var(--fp-text-muted);
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+
+body.theme-dark input,
+body.theme-dark textarea,
+body.theme-dark select {
+    background-color: var(--fp-surface-soft);
+    border-color: var(--fp-border);
+    color: var(--fp-text);
+}
+
+
+body.theme-dark input::placeholder,
+body.theme-dark textarea::placeholder {
+    color: var(--fp-text-muted);
+}
+
+
+body.theme-dark input:focus,
+body.theme-dark textarea:focus,
+body.theme-dark select:focus {
+    border-color: var(--fp-primary);
+    outline: none;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+body.theme-dark .btn-secondary,
+body.theme-dark .secondary-btn,
+body.theme-dark .outline-btn {
+    background-color: var(--fp-surface-soft);
+    border-color: var(--fp-border);
+    color: var(--fp-text);
+}
+
+
+body.theme-dark .btn-secondary:hover,
+body.theme-dark .secondary-btn:hover,
+body.theme-dark .outline-btn:hover {
+    border-color: var(--fp-primary);
+    color: var(--fp-primary);
+}
+
+
+/* =========================================================
+   SERVICE CONTENT
+   ========================================================= */
+
+body.theme-dark .service-card h3,
+body.theme-dark .service-card h4,
+body.theme-dark .service-card strong {
+    color: var(--fp-text);
+}
+
+
+body.theme-dark .service-card p,
+body.theme-dark .service-card span {
+    color: var(--fp-text-secondary);
+}
+
+
+/* =========================================================
+   BOOKING CONTENT
+   ========================================================= */
+
+body.theme-dark .booking-card h3,
+body.theme-dark .booking-card h4,
+body.theme-dark .booking-card strong {
+    color: var(--fp-text);
+}
+
+
+body.theme-dark .booking-card p,
+body.theme-dark .booking-card span {
+    color: var(--fp-text-secondary);
+}
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+body.theme-dark .settings-section-header h2,
+body.theme-dark .settings-item-content strong {
+    color: var(--fp-text);
+}
+
+
+body.theme-dark .settings-section-header p,
+body.theme-dark .settings-item-content span {
+    color: var(--fp-text-secondary);
+}
+
+
+body.theme-dark .settings-item {
+    border-color: var(--fp-border);
+}
+
+
+body.theme-dark .settings-item-icon {
+    background-color: var(--fp-primary-soft);
+    color: var(--fp-primary);
+}
+
+
+body.theme-dark .settings-arrow {
+    color: var(--fp-text-muted);
+}
+
+
+/* =========================================================
+   THEME SELECTOR
+   ========================================================= */
+
+body.theme-dark .theme-option {
+    background-color: var(--fp-surface-soft);
+    border-color: var(--fp-border);
+    color: var(--fp-text-secondary);
+}
+
+
+body.theme-dark .theme-option:hover,
+body.theme-dark .theme-option.active {
+    border-color: var(--fp-primary);
+    background-color: var(--fp-primary-soft);
+    color: var(--fp-primary);
+}
+
+
+/* =========================================================
+   LANGUAGE SELECTOR
+   ========================================================= */
+
+body.theme-dark .language-option {
+    background-color: var(--fp-surface-soft);
+    border-color: var(--fp-border);
+    color: var(--fp-text-secondary);
+}
+
+
+body.theme-dark .language-option:hover,
+body.theme-dark .language-option.active {
+    border-color: var(--fp-primary);
+    background-color: var(--fp-primary-soft);
+    color: var(--fp-primary);
+}
+
+
+/* =========================================================
+   MOBILE BOTTOM NAVIGATION
+   ========================================================= */
+
+body.theme-dark .mobile-bottom-nav {
+    background-color: var(--fp-surface);
+    border-color: var(--fp-border);
+}
+
+
+body.theme-dark .bottom-nav-link {
+    color: var(--fp-text-muted);
+}
+
+
+body.theme-dark .bottom-nav-link.active,
+body.theme-dark .bottom-nav-link:hover {
+    color: var(--fp-primary);
+}
+
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+body.theme-dark table {
+    background-color: var(--fp-surface);
+    color: var(--fp-text);
+}
+
+
+body.theme-dark th {
+    background-color: var(--fp-surface-soft);
+    color: var(--fp-text);
+    border-color: var(--fp-border);
+}
+
+
+body.theme-dark td {
+    color: var(--fp-text-secondary);
+    border-color: var(--fp-border);
+}
+
+
+/* =========================================================
+   DROPDOWNS / POPUPS
+   ========================================================= */
+
+body.theme-dark .dropdown,
+body.theme-dark .dropdown-menu,
+body.theme-dark .menu,
+body.theme-dark .popup,
+body.theme-dark .modal-content {
+    background-color: var(--fp-surface);
+    border-color: var(--fp-border);
+    color: var(--fp-text);
+    box-shadow: var(--fp-shadow);
+}
+
+
+/* =========================================================
+   DIVIDERS
+   ========================================================= */
+
+body.theme-dark hr {
+    border-color: var(--fp-border);
+}
+
+
+/* =========================================================
+   TRANSITIONS
+   ========================================================= */
+
+body,
+.client-dashboard,
+.client-main,
+.dashboard-content,
+.sidebar,
+.topbar,
+.mobile-bottom-nav,
+.card,
+.service-card,
+.booking-card,
+.settings-section,
+.settings-item,
+input,
+textarea,
+select,
+button {
+    transition: var(--fp-transition);
+}
